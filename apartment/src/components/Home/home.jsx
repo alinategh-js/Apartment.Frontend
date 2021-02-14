@@ -1,10 +1,16 @@
 import React, { Component } from 'react';
 
 class Home extends Component {
-    state = {  }
+    state = { 
+        x: true
+     }
     render() { 
         return ( 
-            <h1>خانه</h1>
+            <>
+                <h1>خانه</h1>
+
+                <h2>تست</h2>
+            </>
          );
     }
 }

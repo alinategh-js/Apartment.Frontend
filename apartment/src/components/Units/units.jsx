@@ -6,10 +6,10 @@ class Units extends Component {
         return ( 
             <>
                 <h1>واحد ها</h1>
-                <Table 
+                {/* <Table 
                     items = {this.state.items}
                     onClick = {(item) => this.handleClick(item)}
-                />
+                /> */}
             </>
          );
     }
