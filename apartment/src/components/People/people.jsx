@@ -1,12 +1,15 @@
 import React, { Component } from "react";
+import { getData } from "./peopleServices";
 
 class People extends Component {
   state = {
-      people: []
+    people: [],
   };
 
   componentDidMount() {
-      
+    this.setState({
+      people: getData(),
+    });
   }
 
   render() {
@@ -22,13 +25,13 @@ class People extends Component {
             </tr>
           </thead>
           <tbody>
-              {people.map((person, index) => (
-                  <tr>
-                  <th scope="row">{person.id}</th>
-                  <td>{person.name}</td>
-                  <td>{person.phone}</td>
-                </tr>
-              ))}
+            {this.state.people.map((person, index) => (
+              <tr>
+                <th scope="row">{person.id}</th>
+                <td>{person.name}</td>
+                <td>{person.phone}</td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </>
