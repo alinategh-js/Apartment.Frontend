@@ -9,6 +9,7 @@ import ExpensesCategory from './components/Expenses/expenses-category'
 import Expenses from './components/Expenses/expenses'
 import Header from './common/header'
 import Footer from './common/footer'
+import UnitForm from './components/Units/unitform';
 
 class App extends Component {
   state = {  }
@@ -20,6 +21,10 @@ class App extends Component {
         <Switch>
 
           {/* ============Units =============== */}
+          <Route path='/units/new'>
+            <UnitForm />
+          </Route>
+          
           <Route path='/units'>
             <Units/>
           </Route>
