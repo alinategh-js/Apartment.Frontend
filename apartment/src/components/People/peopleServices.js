@@ -44,4 +44,5 @@ const fakeDatas = [
   },
 ];
 
-export const getData = () => fakeDatas;
+// api 
+export const getPeople = (isOwner = null) => fakeDatas;
