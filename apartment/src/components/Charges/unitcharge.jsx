@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 
-class ExpensesHome extends Component {
+class UnitCharge extends Component {
     state = {  }
     render() { 
         return ( 
-            <h1>Expenses Home</h1>
+            <h1>Unit Charge</h1>
          );
     }
 }
  
-export default ExpensesHome;
+export default UnitCharge;

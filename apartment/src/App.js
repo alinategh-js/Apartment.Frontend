@@ -37,6 +37,9 @@ class App extends Component {
           {/* ================================*/}
 
           {/* ===========Charges ==============*/}
+          <Route path='/charges/:id'>
+            <UnitCharge/>
+          </Route>
           <Route path='/charges'>
             <Charges/>
           </Route>

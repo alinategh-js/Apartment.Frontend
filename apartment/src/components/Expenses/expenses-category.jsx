@@ -4,7 +4,7 @@ class ExpensesCategory extends Component {
     state = {  }
     render() { 
         return ( 
-            <h1>گروه های هزینه</h1>
+            <h1>Expenses Types</h1>
          );
     }
 }

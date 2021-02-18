@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {getExpenses} from './expensesServices'
 
 class Expenses extends Component {
     state = {  }
@@ -9,11 +10,11 @@ class Expenses extends Component {
                     <thead>
                         <tr>
                         <th scope="col">#</th>
-                        <th scope="col">عنوان</th>
-                        <th scope="col">نوع</th>
-                        <th scope="col">از</th>
-                        <th scope="col">تا</th>
-                        <th scope="col">مبلغ</th>
+                        <th scope="col">Title</th>
+                        <th scope="col">Type</th>
+                        <th scope="col">From</th>
+                        <th scope="col">To</th>
+                        <th scope="col">Amount</th>
                         </tr>
                     </thead>
                     <tbody>
