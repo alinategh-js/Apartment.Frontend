@@ -19,6 +19,7 @@ class People extends Component {
       pages: data.total_pages,
       page: 1
     });
+    
   }
 
   pageSelected = async (page) => {
@@ -96,6 +97,7 @@ class People extends Component {
             )}
           </div>
         </div>
+        
       </>
     );
   }
