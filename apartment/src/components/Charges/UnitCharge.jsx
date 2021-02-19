@@ -1,19 +1,19 @@
 import React, { Component } from "react";
-import { getData } from "./unitsServices";
-import axios from "axios";
+import { getData } from "./unitchargesServices";
+// import axios from 'axios';
 import { Link } from "react-router-dom";
 import Pagination from "../../common/pagination";
 
-class Units extends Component {
+class UnitCharge extends Component {
   state = {
-    units: [],
-    pages: 6,
+    unitcharges: [],
+    pages: 5,
     page: 1,
   };
 
-  async componentDidMount() {
+  componentDidMount() {
     this.setState({
-      units: getData(),
+      unitcharges: getData(),
       //   const {data} = await axios.get(`  ${this.state.page}`);
       //units: data.data,
       //     pages: data.total_pages,
@@ -31,33 +31,33 @@ class Units extends Component {
   // };
 
   render() {
-    const { units, pages, page } = this.state;
+    const { unitcharges, pages, page } = this.state;
 
     return (
       <>
-        <Link to="/units/new">
-          <button className="btn btn-success m-2">Add Units</button>
+        <Link to="/charges/:id">
+          <button className="btn btn-success m-2">Add UnitCharge</button>
         </Link>
-        <h1>Units</h1>
+        <h1>UnitCharge</h1>
 
         <table className="table table-striped">
           <thead>
             <tr>
               <th scope="col">#</th>
-              <th scope="col">Unit Number</th>
-              <th scope="col">Owner</th>
-              <th scope="col">Resident</th>
-              <th scope="col">Area</th>
+              <th scope="col">Item As</th>
+              <th scope="col">Payer</th>
+              <th scope="col">Amount</th>
+              <th scope="col">Calculate's Type</th>
             </tr>
           </thead>
           <tbody>
-            {this.state.units.map((unit, index) => (
+            {this.state.unitcharges.map((unitcharge, index) => (
               <tr>
                 <th scope="row">{index}</th>
-                <td>{unit.unitNumber}</td>
-                <td>{unit.owner}</td>
-                <td>{unit.resident}</td>
-                <td>{unit.area}</td>
+                <td>{unitcharge.itemAs}</td>
+                <td>{unitcharge.payer}</td>
+                <td>{unitcharge.amount}</td>
+                <td>{unitcharge.calculatesType}</td>
               </tr>
             ))}
           </tbody>
@@ -73,4 +73,4 @@ class Units extends Component {
   }
 }
 
-export default Units;
+export default UnitCharge;

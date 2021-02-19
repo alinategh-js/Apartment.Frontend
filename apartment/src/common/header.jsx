@@ -14,7 +14,7 @@ class Header extends Component {
             <li class="nav-item">
               <a
                 class="nav-link "
-                href="/"
+                href="#"
                 onclick="ga('send', 'event', 'Navbar', 'Community links', 'Expo');"
               >
                 Home
@@ -58,8 +58,6 @@ class Header extends Component {
                 rel="noopener"
               >
                 Expenses
-              
-              
               </a>
             </li>
           </ul>
