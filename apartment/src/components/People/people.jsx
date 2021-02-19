@@ -1,51 +1,47 @@
 import React, { Component } from "react";
 import FilterList from "../../common/filterList";
-import { getPeople } from "./peopleServices";
+import Pagination from "../../common/pagination";
+import { getItemList, getPeople } from "./peopleServices";
 
 class People extends Component {
   state = {
     people: [],
-    itemList: [
-      {
-        id: 1,
-        isOwner: 1,
-        name: "Owner"
-      },
-      {
-        id: 2,
-        isOwner: 0,
-        name: "Resident"
-      },
-    ],
+    itemList: getItemList(),
     selectedItem: { id: 0 },
+    pages: 0,
+    page: 1,
   };
 
-  componentDidMount() {
-      this.setState({
-        people: getPeople(),
-      });
-    ;
+  async componentDidMount() {
+    const {data} = await getPeople();
+    this.setState({
+      people: data.data,
+      pages: data.total_pages,
+      page: 1
+    });
   }
 
-  handleSelect = (item) => {
+  pageSelected = async (page) => {
+    const {data} = await getPeople(page);
+    this.setState({
+      people: data.data,
+      page: page
+    });
+  }
+
+  handleSelectedItem = (item) => {
     //api call
-    let people;
-    if (item.name === 'Owner')
-      people = getPeople(true)
-    else if (item.name === 'Resident')
-      people = getPeople(false)
-    else
-      people = getPeople()    
-    
+    const firstPage = 1;
+    const people = getPeople(firstPage, item.isOwner);
+
     this.setState({
       selectedItem: item,
-      people
+      people,
     });
-    
-  }
+  };
 
   render() {
-    const { people, itemList, selectedItem } = this.state;
+    const { people, itemList, selectedItem, page, pages } = this.state;
     const peopleCount = people.length;
 
     return (
@@ -57,7 +53,8 @@ class People extends Component {
               keyField="id"
               valueField="name"
               selectedItem={selectedItem}
-              onSelect={(item) => this.handleSelect(item)}
+              onSelect={(item) => this.handleSelectedItem
+            (item)}
             />
           </div>
           <div className="col">
@@ -69,31 +66,36 @@ class People extends Component {
                     <tr>
                       <th scope="col">#</th>
                       <th scope="col">نام</th>
-                    <th scope="col">شماره تلفن</th>
-                    <th scope="col">شماره واحد</th>
-                    <th scope="col">صاحب است؟</th>
+                      <th scope="col">شماره تلفن</th>
+                      <th scope="col">شماره واحد</th>
+                      <th scope="col">صاحب است؟</th>
                     </tr>
                   </thead>
                   <tbody>
                     {people.map((person, index) => (
                       <tr>
                         <th scope="row">{index + 1}</th>
-                      <td>{person.name}</td>
-                      <td>{person.phone}</td>
-                      <td>{person.unitId}</td>
-                      <td>{person.isOwner ? 'Yes' : 'No'}</td>
+                        <td>{person.name}</td>
+                        <td>{person.phone}</td>
+                        <td>{person.unitId}</td>
+                        <td>{person.isOwner ? "Yes" : "No"}</td>
                         <td></td>
                       </tr>
                     ))}
                   </tbody>
                 </table>
+
+                <Pagination
+                  pages={pages}
+                  currentPage={page}
+                  onPageSelect={(page) => this.pageSelected(page)}
+                />
               </>
             ) : (
               <div></div>
             )}
           </div>
         </div>
-        
       </>
     );
   }

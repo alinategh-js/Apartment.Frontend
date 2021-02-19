@@ -44,5 +44,22 @@ const fakeDatas = [
   },
 ];
 
-// api 
-export const getPeople = (isOwner = null) => fakeDatas;
+// api
+export const getItemList = () => [
+  {
+    id: 1,
+    isOwner: 1,
+    name: "Owner",
+  },
+  {
+    id: 2,
+    isOwner: 0,
+    name: "Resident",
+  },
+]
+
+export const getPeople = (page = 1, size = 5, isOwner = null) => fakeDatas;
+
+// TODO: Uncomment and complete the function for making get request to api
+//const url = ''
+//export const getPeople = async (page, size, isOwner) => await axios.get(`${url}/`);
