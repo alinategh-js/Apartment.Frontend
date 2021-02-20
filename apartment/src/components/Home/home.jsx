@@ -7,9 +7,7 @@ class Home extends Component {
     render() { 
         return ( 
             <>
-                <h1>خانه</h1>
-
-                <h2>تست</h2>
+                <h1>Home</h1>
             </>
          );
     }
