@@ -13,22 +13,21 @@ class People extends Component {
   };
 
   async componentDidMount() {
-    const {data} = await getPeople();
+    const { data } = await getPeople();
     this.setState({
       people: data.data,
       pages: data.total_pages,
-      page: 1
+      page: 1,
     });
-    
   }
 
   pageSelected = async (page) => {
-    const {data} = await getPeople(page);
+    const { data } = await getPeople(page);
     this.setState({
       people: data.data,
-      page: page
+      page: page,
     });
-  }
+  };
 
   handleSelectedItem = (item) => {
     //api call
@@ -54,8 +53,7 @@ class People extends Component {
               keyField="id"
               valueField="name"
               selectedItem={selectedItem}
-              onSelect={(item) => this.handleSelectedItem
-            (item)}
+              onSelect={(item) => this.handleSelectedItem(item)}
             />
           </div>
           <div className="col">
@@ -66,10 +64,10 @@ class People extends Component {
                   <thead>
                     <tr>
                       <th scope="col">#</th>
-                      <th scope="col">نام</th>
-                      <th scope="col">شماره تلفن</th>
-                      <th scope="col">شماره واحد</th>
-                      <th scope="col">صاحب است؟</th>
+                      <th scope="col">Name</th>
+                      <th scope="col">Phone Number</th>
+                      <th scope="col">Unit Number</th>
+                      <th scope="col">Owner/Resident</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -97,7 +95,6 @@ class People extends Component {
             )}
           </div>
         </div>
-        
       </>
     );
   }
