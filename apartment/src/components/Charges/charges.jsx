@@ -3,7 +3,7 @@ import { getData } from "./chargesServices";
 import { getUnitList } from "./chargesServices";
 import FilterList from "../../common/filterList";
 // import axios from 'axios';
-//  import { Link } from "react-router-dom";
+// import { Link, Redirect } from "react-router-dom";
 import Pagination from "../../common/pagination";
 
 class Charges extends Component {
@@ -15,7 +15,7 @@ class Charges extends Component {
     page: 1,
   };
 
-  componentDidMount() {
+  componentDidMount = () =>{
     this.setState({
       charges: getData(),
       unitList: getUnitList(),
@@ -26,46 +26,43 @@ class Charges extends Component {
     });
   }
 
-  // pageSelected = async (page) => {
-  //   // const {getData} = await axios.get(` ${page}`);
-  //   this.setState({
-  //     // units: getData,
-  //     page: page
-  //     })
+  pageSelected = async (page) => {
+    // api call to get new page of charges from backend
+    this.setState({
+      // units: getData,
+      page: page
+      })
 
-  // };
+  };
+
+  
+
+
   render() {
-    // const { charges, pages, page } = this.state;
-    const { charges, unitList, selectedUnit, pages, page } = this.state;
+    const { unitList, selectedUnit, pages, page } = this.state;
 
-    const filteredList =
-      selectedUnit && selectedUnit.unitNumber
-        ? charges.filter((x) => x.unitNumber === selectedUnit.unitNumber)
-        : charges;
-    const unitCount = filteredList.length;
 
     return (
-      <div class="row m-2">
-        <div className="col-3">
+      <>
+      
+      <div className="row m-2">
+        <div className="col-2">
           <FilterList
-            items={unitList}
-            keyField="id"
-            valueField="unitNumber"
-            selectedItem={selectedUnit}
-            onSelect={(item) => {
-              this.setState({
-                selectedNumber: item,
-              });
-            }}
-          />
+              items={unitList}
+              keyField="id"
+              valueField="name"
+              selectedItem={selectedUnit}
+              onSelect={(item) => {
+                this.setState({
+                  selectedUnit: item,
+                });
+              }}
+            />
         </div>
-        {/* <div className="col">
-          {charges.length > 0 ? ( */}
-        <>
-          <h3>There are {unitCount} charges</h3>
-          <table className="table">
+        <div className='col-10'>
+          <table className="table table-striped">
             <thead>
-              <tr>
+            <tr>
                 <th scope="col">#</th>
                 <th scope="col">Unit Number</th>
                 <th scope="col">From</th>
@@ -75,24 +72,25 @@ class Charges extends Component {
             </thead>
             <tbody>
               {this.state.charges.map((charge, index) => (
-                <tr>
-                  <th scope="row">{index + 1}</th>
-                  <td>{charge.unitNumber}</td>
-                  <td>{charge.from}</td>
-                  <td>{charge.to}</td>
-                  <td>{charge.amount}</td>
-                </tr>
+                  <tr >
+                    <th scope="row">{index + 1}</th>
+                    <td>{charge.unitNumber}</td>
+                    <td>{charge.from}</td>
+                    <td>{charge.to}</td>
+                    <td>{charge.amount}</td>
+                  </tr>
               ))}
             </tbody>
+            
           </table>
           <Pagination
             pages={pages}
             currentPage={page}
-            onPageSelect={(page) => this.pageSelected(page)}
+            onPageSelect={(pagenum) => this.pageSelected(pagenum)}
           />
-        </>
+        </div> 
       </div>
-      //   </div>
+      </>
     );
   }
 }

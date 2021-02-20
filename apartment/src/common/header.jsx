@@ -9,38 +9,38 @@ class Header extends Component {
         className="navbar navbar-expand-lg navbar-light bg-light flex-column flex-md-row bd-navbar"
         data-toggle="collapse"
       >
-        <div class="navbar-nav-scroll">
-          <ul class="navbar-nav bd-navbar-nav flex-row">
-            <li class="nav-item">
+        <div className="navbar-nav-scroll">
+          <ul className="navbar-nav bd-navbar-nav flex-row">
+            <li className="nav-item">
               <a
-                class="nav-link "
+                className="nav-link "
                 href="#"
                 onclick="ga('send', 'event', 'Navbar', 'Community links', 'Expo');"
               >
                 Home
               </a>
             </li>
-            <li class="nav-item">
+            <li className="nav-item">
               <a
-                class="nav-link active"
+                className="nav-link active"
                 href="#"
                 onclick="ga('send', 'event', 'Navbar', 'Community links', 'Expo');"
               >
                 Units
               </a>
             </li>
-            <li class="nav-item">
+            <li className="nav-item">
               <a
-                class="nav-link "
+                className="nav-link "
                 href="#"
                 onclick="ga('send', 'event', 'Navbar', 'Community links', 'Expo');"
               >
                 People
               </a>
             </li>
-            <li class="nav-item">
+            <li className="nav-item">
               <a
-                class="nav-link"
+                className="nav-link"
                 href="#"
                 onclick="ga('send', 'event', 'Navbar', 'Community links', 'Expo');"
                 target="_blank"
@@ -49,9 +49,9 @@ class Header extends Component {
                 Charges
               </a>
             </li>
-            <li class="nav-item">
+            <li className="nav-item">
               <a
-                class="nav-link"
+                className="nav-link"
                 href="#"
                 onclick="ga('send', 'event', 'Navbar', 'Community links', 'Expo');"
                 target="_blank"

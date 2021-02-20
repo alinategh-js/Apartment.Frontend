@@ -1,15 +1,19 @@
 import React, { Component } from "react";
 import { getData } from "./unitchargesServices";
 // import axios from 'axios';
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import Pagination from "../../common/pagination";
 
 class UnitCharge extends Component {
   state = {
     unitcharges: [],
+   
     pages: 5,
     page: 1,
   };
+
+
+ 
 
   componentDidMount() {
     this.setState({
@@ -21,24 +25,20 @@ class UnitCharge extends Component {
     });
   }
 
-  // pageSelected = async (page) => {
-  //   // const {getData} = await axios.get(` ${page}`);
-  //   this.setState({
-  //     // units: getData,
-  //     page: page
-  //     })
-
-  // };
+  pageSelected = async (page) => {
+    // const {getData} = await axios.get(` ${page}`);
+    this.setState({
+      // units: getData,
+      page: page,
+    });
+  };
 
   render() {
-    const { unitcharges, pages, page } = this.state;
+    const { pages, page } = this.state;
 
     return (
       <>
-        <Link to="/charges/:id">
-          <button className="btn btn-success m-2">Add UnitCharge</button>
-        </Link>
-        <h1>UnitCharge</h1>
+        <h1>UnitCharges</h1>
 
         <table className="table table-striped">
           <thead>
@@ -53,21 +53,36 @@ class UnitCharge extends Component {
           <tbody>
             {this.state.unitcharges.map((unitcharge, index) => (
               <tr>
-                <th scope="row">{index}</th>
+                <th scope="row">{index + 1}</th>
                 <td>{unitcharge.itemAs}</td>
                 <td>{unitcharge.payer}</td>
                 <td>{unitcharge.amount}</td>
                 <td>{unitcharge.calculatesType}</td>
               </tr>
             ))}
+            <tr>
+              <td></td>
+              <td>-----</td>
+              <td>Rezaii</td>
+              <td>22000</td>
+              <td>-----</td>
+            </tr>
+            <tr>
+            <td></td>
+            <td>-----</td>
+            <td>Ahmadi</td>
+            <td>22155</td>
+            <td>-----</td>
+            </tr>
           </tbody>
         </table>
-
-        <Pagination
-          pages={pages}
-          currentPage={page}
-          onPageSelect={(page) => this.pageSelected(page)}
-        />
+        <div>
+          <Pagination
+            pages={pages}
+            currentPage={page}
+            onPageSelect={(page) => this.pageSelected(page)}
+          />
+        </div>
       </>
     );
   }
