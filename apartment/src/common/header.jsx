@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-
+import { Link } from "react-router-dom";
 class Header extends Component {
   state = {};
 
@@ -12,53 +12,44 @@ class Header extends Component {
         <div className="navbar-nav-scroll">
           <ul className="navbar-nav bd-navbar-nav flex-row">
             <li className="nav-item">
-              <a
+              <Link
                 className="nav-link "
-                href="#"
-                onclick="ga('send', 'event', 'Navbar', 'Community links', 'Expo');"
+                to= '/'
               >
                 Home
-              </a>
+              </Link>
             </li>
             <li className="nav-item">
-              <a
+              <Link
                 className="nav-link active"
-                href="#"
-                onclick="ga('send', 'event', 'Navbar', 'Community links', 'Expo');"
+                to="/units"
               >
                 Units
-              </a>
+              </Link>
             </li>
             <li className="nav-item">
-              <a
+              <Link
                 className="nav-link "
-                href="#"
-                onclick="ga('send', 'event', 'Navbar', 'Community links', 'Expo');"
+                to ="/people"
               >
                 People
-              </a>
+              </Link>
             </li>
             <li className="nav-item">
-              <a
+              <Link
                 className="nav-link"
-                href="#"
-                onclick="ga('send', 'event', 'Navbar', 'Community links', 'Expo');"
-                target="_blank"
-                rel="noopener"
-              >
+                to ="/charges"
+                >
                 Charges
-              </a>
+              </Link>
             </li>
             <li className="nav-item">
-              <a
+              <Link
                 className="nav-link"
-                href="#"
-                onclick="ga('send', 'event', 'Navbar', 'Community links', 'Expo');"
-                target="_blank"
-                rel="noopener"
+               to = "/expenses" 
               >
                 Expenses
-              </a>
+              </Link>
             </li>
           </ul>
         </div>

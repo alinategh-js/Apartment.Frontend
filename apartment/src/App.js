@@ -11,6 +11,9 @@ import Header from "./common/header";
 import Footer from "./common/footer";
 import UnitForm from "./components/Units/unitform";
 import UnitCharge from "./components/Charges/UnitCharge";
+import PersonForm from "./components/People/personForm";
+import ExpensesForm from "./components/Expenses/expensesForm";
+import ExpensesTypeForm from "./components/Expenses/expenseTypeForm";
 
 class App extends Component {
   state = {};
@@ -31,6 +34,9 @@ class App extends Component {
             {/* ========================== */}
 
             {/* ===========People ==============*/}
+            <Route path="/people/entrance">
+              <PersonForm />
+            </Route>
             <Route path="/people">
               <People />
             </Route>
@@ -49,6 +55,14 @@ class App extends Component {
             {/* ==================================== */}
 
             {/* ===========Expenses ==============*/}
+            <Route path="/expenses/expcatentrance">
+              <ExpensesTypeForm />
+            </Route>
+
+            <Route path="/expenses/expentrance">
+              <ExpensesForm />
+            </Route>
+
             <Route path="/expenses/expcat">
               <ExpensesCategory />
             </Route>

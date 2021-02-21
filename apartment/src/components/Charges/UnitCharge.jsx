@@ -3,11 +3,12 @@ import { getData } from "./unitchargesServices";
 // import axios from 'axios';
 // import { Link } from "react-router-dom";
 import Pagination from "../../common/pagination";
+// import {getUnitList} from "./Charges/unitchargesServices"
 
 class UnitCharge extends Component {
   state = {
     unitcharges: [],
-   
+    // unitInfos:[],
     pages: 5,
     page: 1,
   };
@@ -18,6 +19,8 @@ class UnitCharge extends Component {
   componentDidMount() {
     this.setState({
       unitcharges: getData(),
+      // unitinfos: getUnitList(), 
+
       //   const {data} = await axios.get(`  ${this.state.page}`);
       //units: data.data,
       //     pages: data.total_pages,
@@ -38,6 +41,26 @@ class UnitCharge extends Component {
 
     return (
       <>
+      
+      {/* <h4 >Unit Information </h4> */}
+
+        {/* <table className="table col-md-4">
+        <tbody>
+            {this.state.unitInfos} => (
+              <tr>
+                <th scope="row"></th>
+                <td>UnitNumber: {unitInfos.unitNumber}</td>
+                <td>Owner : {unitInfos.owner}</td>
+                <td>Resident: {unitInfos.resident}</td>
+                <td>Unit Area: {unitInfos.unitArea}</td>
+                <td>From : {unitInfos.from}</td>
+                <td>To : {unitInfos.to}</td>
+              </tr>
+            ))} */}
+            
+          {/* </tbody>
+        </table>
+         */}
         <h1>UnitCharges</h1>
 
         <table className="table table-striped">

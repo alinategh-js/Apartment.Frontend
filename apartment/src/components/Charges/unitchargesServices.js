@@ -23,4 +23,22 @@ const fakeUnitCharge = [
   },
 ];
 
+
+
+const fakeUnitData = [
+  {
+    
+    unitNumber: "2",
+    owner: "Ahmadi",
+    resident: "Asadi",
+    area: 87,
+    from: 2001/2/30,
+    to: 2001/3/30,
+  },
+  
+];
+
+export const getUnitData = () => fakeUnitData;
+
 export const getData = () => fakeUnitCharge;
+

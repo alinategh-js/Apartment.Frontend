@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { getData } from "./unitsServices";
-import axios from "axios";
+// import axios from "axios";
 import { Link } from "react-router-dom";
 import Pagination from "../../common/pagination";
 
@@ -31,7 +31,7 @@ class Units extends Component {
   // };
 
   render() {
-    const { units, pages, page } = this.state;
+    const { pages, page } = this.state;
 
     return (
       <>
