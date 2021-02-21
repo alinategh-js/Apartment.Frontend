@@ -7,7 +7,7 @@ class UnitForm extends Component {
             <>
             <form>
                     <div className="form-group">
-                        <label htmlfor="unitnumber">Unit Number</label>
+                        <label html="unitnumber">Unit Number</label>
                         <input type="text"  id="unitnumber"  ></input>
                         <small></small>
                     </div>

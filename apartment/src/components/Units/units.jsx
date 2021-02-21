@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { getData } from "./unitsServices";
-import axios from "axios";
+//import axios from "axios";
 import { Link } from "react-router-dom";
 import Pagination from "../../common/pagination";
 
@@ -21,14 +21,14 @@ class Units extends Component {
     });
   }
 
-  // pageSelected = async (page) => {
-  //   // const {getData} = await axios.get(` ${page}`);
-  //   this.setState({
-  //     // units: getData,
-  //     page: page
-  //     })
+  pageSelected = async (page) => {
+    // const {getData} = await axios.get(` ${page}`);
+    this.setState({
+      // units: getData,
+      page: page
+      })
 
-  // };
+  };
 
   render() {
     const { units, pages, page } = this.state;
