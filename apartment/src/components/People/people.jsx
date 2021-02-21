@@ -13,26 +13,26 @@ class People extends Component {
   };
 
   async componentDidMount() {
-    const { data } = await getPeople();
+    const people = await getPeople();
     this.setState({
-      people: data.data,
-      pages: data.total_pages,
+      people,
+      pages: 3,
       page: 1,
     });
   }
 
   pageSelected = async (page) => {
-    const { data } = await getPeople(page);
+    const people = await getPeople(page);
     this.setState({
-      people: data.data,
+      people,
       page: page,
     });
   };
 
-  handleSelectedItem = (item) => {
+  handleSelectedItem = async (item) => {
     //api call
     const firstPage = 1;
-    const people = getPeople(firstPage, item.isOwner);
+    const people = await getPeople(firstPage, item.isOwner);
 
     this.setState({
       selectedItem: item,
