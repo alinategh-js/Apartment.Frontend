@@ -17,9 +17,9 @@ class ExpenseTypeForm extends Component {
                 <select className="custom-select" id="inputGroupSelect01">
                     <option selected>Choose...</option>
                     <option value="1">fix</option>
-                    <option value="2">by Meters</option>
+                    <option value="2">by People</option>
                     <option value="3">by Area</option>
-                    <option value="3">by Meters and Area</option>
+                    <option value="3">by People and Area</option>
                 </select>
                 </div>                              
                

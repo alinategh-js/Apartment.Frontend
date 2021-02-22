@@ -3,20 +3,20 @@ import { getData } from "./chargesServices";
 import { getUnitList } from "./chargesServices";
 import FilterList from "../../common/filterList";
 // import axios from 'axios';
-// import { Link, Redirect } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import Pagination from "../../common/pagination";
 
 class Charges extends Component {
   state = {
     charges: [],
     unitList: [],
-    selectedUnit: { id: 0 },
+    selectedUnit: { unitId: 0 },
     pages: 3,
     page: 1,
   };
 
-  componentDidMount = () =>{
-    this.setState({
+  componentDidMount = async () =>{
+    await this.setState({
       charges: getData(),
       unitList: getUnitList(),
       //   //   const {data} = await axios.get(`  ${this.state.page}`);
@@ -24,6 +24,7 @@ class Charges extends Component {
       //     pages: data.total_pages,
       //     page: 1
     });
+    console.log(this.state.charges)
   }
 
   pageSelected = async (page) => {
@@ -61,6 +62,7 @@ class Charges extends Component {
         </div>
         <div className='col-10'>
           <table className="table table-striped">
+          
             <thead>
             <tr>
                 <th scope="col">#</th>
@@ -68,16 +70,19 @@ class Charges extends Component {
                 <th scope="col">From</th>
                 <th scope="col">To</th>
                 <th scope="col">Amount</th>
+                <th scope="col">UnitDetail</th>
               </tr>
             </thead>
             <tbody>
               {this.state.charges.map((charge, index) => (
-                  <tr >
+                  <tr key={index}>
                     <th scope="row">{index + 1}</th>
                     <td>{charge.unitNumber}</td>
                     <td>{charge.from}</td>
                     <td>{charge.to}</td>
                     <td>{charge.amount}</td>
+                    <Link className="btn btn-secondary btn-sm active m-2" to = {`/charges/${charge.unitNumber}`} role="button" aria-pressed="true">Detail</Link>
+
                   </tr>
               ))}
             </tbody>

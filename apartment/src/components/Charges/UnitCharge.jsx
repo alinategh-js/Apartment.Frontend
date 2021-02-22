@@ -11,10 +11,9 @@ class UnitCharge extends Component {
     // unitInfos:[],
     pages: 5,
     page: 1,
+    
   };
-
-
- 
+  
 
   componentDidMount() {
     this.setState({
@@ -35,52 +34,36 @@ class UnitCharge extends Component {
       page: page,
     });
   };
+ 
+  
+ 
 
   render() {
     const { pages, page } = this.state;
-
     return (
-      <>
-      
-      {/* <h4 >Unit Information </h4> */}
-
-        {/* <table className="table col-md-4">
-        <tbody>
-            {this.state.unitInfos} => (
-              <tr>
-                <th scope="row"></th>
-                <td>UnitNumber: {unitInfos.unitNumber}</td>
-                <td>Owner : {unitInfos.owner}</td>
-                <td>Resident: {unitInfos.resident}</td>
-                <td>Unit Area: {unitInfos.unitArea}</td>
-                <td>From : {unitInfos.from}</td>
-                <td>To : {unitInfos.to}</td>
-              </tr>
-            ))} */}
-            
-          {/* </tbody>
-        </table>
-         */}
+  <>
+                
+     
         <h1>UnitCharges</h1>
 
-        <table className="table table-striped">
+        <table className="table table-striped" style={{border: "none"}}>
           <thead>
             <tr>
               <th scope="col">#</th>
               <th scope="col">Item As</th>
               <th scope="col">Payer</th>
               <th scope="col">Amount</th>
-              <th scope="col">Calculate's Type</th>
+              <th scope="col">Formula Type</th>
             </tr>
           </thead>
           <tbody>
             {this.state.unitcharges.map((unitcharge, index) => (
-              <tr>
+              <tr key={index}>
                 <th scope="row">{index + 1}</th>
                 <td>{unitcharge.itemAs}</td>
                 <td>{unitcharge.payer}</td>
                 <td>{unitcharge.amount}</td>
-                <td>{unitcharge.calculatesType}</td>
+                <td>{unitcharge.formulaType}</td>
               </tr>
             ))}
             <tr>
@@ -107,8 +90,9 @@ class UnitCharge extends Component {
           />
         </div>
       </>
-    );
+    ); 
   }
 }
+
 
 export default UnitCharge;

@@ -5,40 +5,40 @@ const fakeUnitCharge = [
     itemAs: "gas",
     payer: "Ahmadi",
     amount: 67000,
-    calculatesType: "bypeaple",
+    formulaType: "bypeaple",
   },
   {
     id: 2,
     itemAs: "water",
     payer: "rezaii",
     amount: 50000,
-    calculatesType: "byArea",
+    formulaType: "byArea",
   },
   {
     id: 3,
     itemAs: "cleaning",
     payer: "rezaii",
     amount: 20000,
-    calculatesType: "fix",
+    formulaType: "fix",
   },
 ];
 
 
 
-const fakeUnitData = [
-  {
+// const fakeUnitData = [
+//   {
     
-    unitNumber: "2",
-    owner: "Ahmadi",
-    resident: "Asadi",
-    area: 87,
-    from: 2001/2/30,
-    to: 2001/3/30,
-  },
+//     unitNumber: "2",
+//     owner: "Ahmadi",
+//     resident: "Asadi",
+//     area: 87,
+//     from: 2001/2/30,
+//     to: 2001/3/30,
+//   },
   
-];
+// ];
 
-export const getUnitData = () => fakeUnitData;
+// export const getUnitData = () => fakeUnitData;
 
 export const getData = () => fakeUnitCharge;
 

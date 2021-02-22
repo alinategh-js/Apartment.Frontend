@@ -55,11 +55,11 @@ class App extends Component {
             {/* ==================================== */}
 
             {/* ===========Expenses ==============*/}
-            <Route path="/expenses/expcatentrance">
+            <Route path="/expenses/expcat/new">
               <ExpensesTypeForm />
             </Route>
 
-            <Route path="/expenses/expentrance">
+            <Route path="/expenses/exp/new">
               <ExpensesForm />
             </Route>
 

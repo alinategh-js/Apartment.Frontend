@@ -11,15 +11,6 @@ class UnitForm extends Component {
                    
                 </div>
                 <div className="form-group">
-                    <label htmlFor="Owner">Owner</label>
-                    <input type="text" class="form-control" id="owner" placeholder="Enter owner of unit"></input>
-                </div>
-                
-                <div className="form-group">
-                    <label htmlFor="Resident">Resident</label>
-                    <input type="text" class="form-control" id="resident" placeholder="Enter resident of unit"></input>
-                </div>
-                <div className="form-group">
                     <label htmlFor="Area">Area</label>
                     <input type="text" class="form-control" id="area" placeholder="Enter area of unit"></input>
                      <small id="area" class="form-text text-muted">Enter unit area by meters.</small>
