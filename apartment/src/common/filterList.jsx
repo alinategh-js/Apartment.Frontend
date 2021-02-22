@@ -5,7 +5,7 @@ const FilterList = (props) => {
   const { items, keyField, valueField, selectedItem, onSelect } = props;
 
   return (
-    <ul class="list-group">
+    <ul className="list-group">
       <li
         key="0"
         className={`list-group-item clickable ${

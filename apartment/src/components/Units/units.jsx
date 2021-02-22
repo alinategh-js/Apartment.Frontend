@@ -31,7 +31,7 @@ class Units extends Component {
   };
 
   render() {
-    const { units, pages, page } = this.state;
+    const { pages, page } = this.state;
 
     return (
       <>

@@ -2,15 +2,15 @@
 const fakeUnits = [{
     id: 3,
     unitNumber: 4,
-    owner: 43,
-    resident: 6,
+    owner: "Milani",
+    resident: "Karami",
     area: 67
 },
 {
     id: 6,
     unitNumber: 6,
-    owner: 50,
-    resident: 7,
+    owner: "Khani",
+    resident: "Akbari",
     area: 80
 }]
 
