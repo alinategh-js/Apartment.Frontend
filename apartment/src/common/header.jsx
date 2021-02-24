@@ -1,12 +1,16 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import AddButton from "./add-button";
+
+import './header.css'
+
 class Header extends Component {
   state = {};
 
   render() {
     return (
       <nav
-        className="navbar navbar-expand-lg navbar-light bg-light flex-column flex-md-row bd-navbar"
+        className="navbar navbar-expand-lg navbar-dark bg-dark flex-column flex-md-row bd-navbar"
         data-toggle="collapse"
       >
         <div className="navbar-nav-scroll">
@@ -21,7 +25,7 @@ class Header extends Component {
             </li>
             <li className="nav-item">
               <Link
-                className="nav-link active"
+                className="nav-link"
                 to='/units'
               >
                 Units
@@ -52,6 +56,7 @@ class Header extends Component {
               </Link>
             </li>
           </ul>
+          <AddButton/>
         </div>
       </nav>
     );
