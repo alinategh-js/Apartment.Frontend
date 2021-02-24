@@ -11,9 +11,12 @@ import Header from "./common/header";
 import Footer from "./common/footer";
 import UnitForm from "./components/Units/unitform";
 import UnitCharge from "./components/Charges/UnitCharge";
+import UnitOwnerResidentForm from "./components/Units/unitOwnerResidentForm"
 import PersonForm from "./components/People/personForm";
 import ExpensesForm from "./components/Expenses/expensesForm";
 import ExpensesTypeForm from "./components/Expenses/expenseTypeForm";
+import CreateBuilding from "./components/Home/createBuilding";
+
 
 class App extends Component {
   state = {};
@@ -24,6 +27,11 @@ class App extends Component {
         <div className="container">
           <Switch>
             {/* ============Units =============== */}
+           
+            <Route path="/units/form/:id">
+              <UnitOwnerResidentForm />
+            </Route>
+
             <Route path="/units/new">
               <UnitForm />
             </Route>
@@ -34,9 +42,12 @@ class App extends Component {
             {/* ========================== */}
 
             {/* ===========People ==============*/}
-            <Route path="/people/entrance">
+           
+
+            <Route path="/people/new">
               <PersonForm />
             </Route>
+
             <Route path="/people">
               <People />
             </Route>
@@ -77,6 +88,10 @@ class App extends Component {
             {/* ==================================== */}
 
             {/* ===========Home ==============*/}
+            <Route path="/">
+              <CreateBuilding />
+            </Route>
+
             <Route path="/">
               <Home />
             </Route>

@@ -81,7 +81,7 @@ class Charges extends Component {
                     <td>{charge.from}</td>
                     <td>{charge.to}</td>
                     <td>{charge.amount}</td>
-                    <Link className="btn btn-secondary btn-sm active m-2" to = {`/charges/${charge.unitNumber}`} role="button" aria-pressed="true">Detail</Link>
+                    <td><Link className="btn btn-secondary btn-sm active m-2" to = {`/charges/${charge.unitNumber}`} role="button" aria-pressed="true">Detail</Link></td>
 
                   </tr>
               ))}

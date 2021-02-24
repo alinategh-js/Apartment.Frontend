@@ -77,7 +77,7 @@ class People extends Component {
                         <td>{person.name}</td>
                         <td>{person.phone}</td>
                         <td>{person.unitId}</td>
-                        <td>{person.isOwner ? "Yes" : "No"}</td>
+                        <td>{person.isOwner ? "Owner" : "Resident"}</td>
                         <td></td>
                       </tr>
                     ))}

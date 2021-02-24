@@ -48,6 +48,8 @@ class Units extends Component {
               <th scope="col">Owner</th>
               <th scope="col">Resident</th>
               <th scope="col">Area</th>
+              <th scope="col">Update</th>
+
             </tr>
           </thead>
           <tbody>
@@ -58,7 +60,8 @@ class Units extends Component {
                 <td>{unit.owner}</td>
                 <td>{unit.resident}</td>
                 <td>{unit.area}</td>
-              </tr>
+                <td><Link className="btn btn-secondary btn-sm active m-2" to = {`/units/form/${unit.unitNumber}`} role="button" aria-pressed="true">Edit</Link></td>
+                </tr>
             ))}
           </tbody>
         </table>
