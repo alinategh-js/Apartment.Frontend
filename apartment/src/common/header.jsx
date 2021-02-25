@@ -1,16 +1,17 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-class Header extends Component {
-  state = {};
+import AddButton from "./add-button";
 
-  render() {
+import './header.css'
+
+const Header = ({showModal}) => {
     return (
       <nav
-        className="navbar navbar-expand-lg navbar-light bg-light flex-column flex-md-row bd-navbar"
+        className="navbar navbar-expand-lg navbar-dark bg-dark"
         data-toggle="collapse"
       >
-        <div className="navbar-nav-scroll">
-          <ul className="navbar-nav bd-navbar-nav flex-row">
+        <div className='navbar-collapse'>
+          <ul className="navbar-nav mr-auto">
             <li className="nav-item">
               <Link
                 className="nav-link "
@@ -21,7 +22,7 @@ class Header extends Component {
             </li>
             <li className="nav-item">
               <Link
-                className="nav-link active"
+                className="nav-link"
                 to='/units'
               >
                 Units
@@ -52,10 +53,10 @@ class Header extends Component {
               </Link>
             </li>
           </ul>
+          <AddButton showModal={showModal}/>
         </div>
       </nav>
     );
-  }
-}
+};
 
 export default Header;

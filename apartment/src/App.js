@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, Link } from "react-router-dom";
 import Home from "./components/Home/home";
 import Units from "./components/Units/units";
 import People from "./components/People/people";
@@ -14,13 +14,31 @@ import UnitCharge from "./components/Charges/UnitCharge";
 import PersonForm from "./components/People/personForm";
 import ExpensesForm from "./components/Expenses/expensesForm";
 import ExpensesTypeForm from "./components/Expenses/expenseTypeForm";
+import Modal from './common/modal'
 
 class App extends Component {
-  state = {};
+  state = {
+    modalDisplay: false
+  };
+
+  handleShowModal = () => {
+    this.setState({
+      modalDisplay: true
+    })
+    console.log('show modal')
+  }
+
+  handleCloseModal = () => {
+    this.setState({
+      modalDisplay: false
+    })
+  }
+
   render() {
     return (
       <>
-        <Header />
+        <Header showModal={this.handleShowModal}/>
+        <Modal show={this.state.modalDisplay} hideModal={this.handleCloseModal} />
         <div className="container">
           <Switch>
             {/* ============Units =============== */}
@@ -34,7 +52,7 @@ class App extends Component {
             {/* ========================== */}
 
             {/* ===========People ==============*/}
-            <Route path="/people/entrance">
+            <Route path="/people/new">
               <PersonForm />
             </Route>
             <Route path="/people">
