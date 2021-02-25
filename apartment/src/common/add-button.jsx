@@ -1,13 +1,17 @@
 import React, { Component } from 'react'
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPlusCircle} from '@fortawesome/free-solid-svg-icons'
 
-class AddButton extends Component {
-    state = {  }
-    render() { 
+const plusIcon = <FontAwesomeIcon icon={faPlusCircle} className='add-btn-icon'/>
+
+
+const AddButton = ({showModal}) => {
         return ( 
-            <button class="btn btn-success my-2 my-sm-0">+</button>
+            <button className='btn' onClick={showModal}>
+                {plusIcon}
+            </button>
          );
-    }
-}
+};
  
 export default AddButton;

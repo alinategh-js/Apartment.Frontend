@@ -4,17 +4,14 @@ import AddButton from "./add-button";
 
 import './header.css'
 
-class Header extends Component {
-  state = {};
-
-  render() {
+const Header = ({showModal}) => {
     return (
       <nav
-        className="navbar navbar-expand-lg navbar-dark bg-dark flex-column flex-md-row bd-navbar"
+        className="navbar navbar-expand-lg navbar-dark bg-dark"
         data-toggle="collapse"
       >
-        <div className="navbar-nav-scroll">
-          <ul className="navbar-nav bd-navbar-nav flex-row">
+        <div className='navbar-collapse'>
+          <ul className="navbar-nav mr-auto">
             <li className="nav-item">
               <Link
                 className="nav-link "
@@ -56,11 +53,10 @@ class Header extends Component {
               </Link>
             </li>
           </ul>
-          <AddButton/>
+          <AddButton showModal={showModal}/>
         </div>
       </nav>
     );
-  }
-}
+};
 
 export default Header;
