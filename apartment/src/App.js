@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, Link } from "react-router-dom";
 import Home from "./components/Home/home";
 import Units from "./components/Units/units";
 import People from "./components/People/people";
@@ -19,11 +19,28 @@ import CreateBuilding from "./components/Home/createBuilding";
 
 
 class App extends Component {
-  state = {};
+  state = {
+    modalDisplay: false
+  };
+
+  handleShowModal = () => {
+    this.setState({
+      modalDisplay: true
+    })
+    console.log('show modal')
+  }
+
+  handleCloseModal = () => {
+    this.setState({
+      modalDisplay: false
+    })
+  }
+
   render() {
     return (
       <>
-        <Header />
+        <Header showModal={this.handleShowModal}/>
+        <Modal show={this.state.modalDisplay} hideModal={this.handleCloseModal} />
         <div className="container">
           <Switch>
             {/* ============Units =============== */}

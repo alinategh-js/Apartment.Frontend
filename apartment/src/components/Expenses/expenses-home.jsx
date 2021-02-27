@@ -4,11 +4,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFileInvoiceDollar, faSitemap } from '@fortawesome/free-solid-svg-icons'
 
 
-import './expenses.css'
 
-
-const fileInvoiceIcon = <FontAwesomeIcon icon={faFileInvoiceDollar} className='exp-icon'/>
-const siteMapIcon = <FontAwesomeIcon icon={faSitemap} className='exp-icon'/>
+const fileInvoiceIcon = <FontAwesomeIcon icon={faFileInvoiceDollar} className='card-icon'/>
+const siteMapIcon = <FontAwesomeIcon icon={faSitemap} className='card-icon'/>
 
 class ExpensesHome extends Component {
     state = {  }
