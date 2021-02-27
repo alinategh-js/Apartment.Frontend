@@ -1,47 +1,43 @@
-import React, { Component } from "react";
-import { getData } from "./chargesServices";
-import { getUnitList } from "./chargesServices";
+import React, { useState,useEffect } from "react";
+import { getChargeData, getPerUnitChargeList } from "./chargesServices";
 import FilterList from "../../common/filterList";
 // import axios from 'axios';
 import { Link, Redirect } from "react-router-dom";
 import Pagination from "../../common/pagination";
 
-class Charges extends Component {
-  state = {
-    charges: [],
-    unitList: [],
-    selectedUnit: { unitId: 0 },
-    pages: 3,
-    page: 1,
-  };
 
-  componentDidMount = async () =>{
-    await this.setState({
-      charges: getData(),
-      unitList: getUnitList(),
-      //   //   const {data} = await axios.get(`  ${this.state.page}`);
-      //   //units: data.data,
-      //     pages: data.total_pages,
-      //     page: 1
-    });
-    console.log(this.state.charges)
-  }
+const Charges = ()=>{
+  const [charges, setCharges] = useState([])
+  const [unitChargeList, setUnitChargeList]=useState([])
+  const [selectedUnit, setSelectedUnit] = useState({id:0})
+  const [page, setPage]=useState(1)
+  const [pages, setPages]=useState(5)
 
-  pageSelected = async (page) => {
+
+
+
+useEffect(()=>{
+  setCharges(getChargeData())
+  setUnitChargeList(getPerUnitChargeList())
+}, [])
+
+  const pageSelected = async (page) => {
     // api call to get new page of charges from backend
-    this.setState({
-      // units: getData,
-      page: page
-      })
+    
+     
+      setPage(page)
+      
 
+  };
+  const handleSelectedItem = async (item) => {
+    //api call
+   setSelectedUnit(item)
+      
   };
 
   
-
-
-  render() {
-    const { unitList, selectedUnit, pages, page } = this.state;
-
+   
+    const chargeCount = charges.length;
 
     return (
       <>
@@ -49,18 +45,17 @@ class Charges extends Component {
       <div className="row m-2">
         <div className="col-2">
           <FilterList
-              items={unitList}
+              items={unitChargeList}
               keyField="id"
               valueField="name"
               selectedItem={selectedUnit}
-              onSelect={(item) => {
-                this.setState({
-                  selectedUnit: item,
-                });
-              }}
+              onSelect={(item) => handleSelectedItem(item)}
+              
             />
         </div>
         <div className='col-10'>
+        {charges.length > 0 ? (
+          <>
           <table className="table table-striped">
           
             <thead>
@@ -74,8 +69,8 @@ class Charges extends Component {
               </tr>
             </thead>
             <tbody>
-              {this.state.charges.map((charge, index) => (
-                  <tr key={index}>
+              {charges.map((charge, index) => (
+                  <tr key={charge.id}>
                     <th scope="row">{index + 1}</th>
                     <td>{charge.unitNumber}</td>
                     <td>{charge.from}</td>
@@ -91,13 +86,17 @@ class Charges extends Component {
           <Pagination
             pages={pages}
             currentPage={page}
-            onPageSelect={(pagenum) => this.pageSelected(pagenum)}
-          />
-        </div> 
+            onPageSelect={(pagenum) => pageSelected(pagenum)}
+            />
+            </>
+          ) : (
+            <div></div>
+          )}
+        </div>
       </div>
-      </>
-    );
-  }
+    </>
+  );
 }
+
 
 export default Charges;

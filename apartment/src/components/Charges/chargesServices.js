@@ -31,7 +31,7 @@ const fakeCharges = [
 ];
 
 
-const unitList = [
+const perunitchargeList = [
   {
     id: 2,
     name: "Unit 1",
@@ -42,6 +42,6 @@ const unitList = [
   },
 ];
 
-export const getUnitList = () => unitList;
+export const getPerUnitChargeList = () => perunitchargeList;
 
-export const getData = () => fakeCharges;
+export const getChargeData = () => fakeCharges;

@@ -1,50 +1,63 @@
-import React, { Component } from "react";
-import { getData } from "./unitchargesServices";
+import React, {useState, useEffect } from "react";
+import { getUnitChargeData } from "./unitchargesServices";
 // import axios from 'axios';
 // import { Link } from "react-router-dom";
 import Pagination from "../../common/pagination";
+
 // import {getUnitList} from "./Charges/unitchargesServices"
 
-class UnitCharge extends Component {
-  state = {
-    unitcharges: [],
-    // unitInfos:[],
-    pages: 5,
-    page: 1,
+
+const UnitCharge = () => {
+   
+  
+
+  const [unitcharges, setUnitCharges] = useState([])
+  const [page, setPage] =useState(1)
+  const [pages, setPages]=useState(5)
+
+  
+// class UnitCharge extends Component {
+//   state = {
+//     unitcharges: [],
+//     // unitInfos:[],
+//     pages: 5,
+//     page: 1,
+    
+//   };
+  
+useEffect(() => {
+  setUnitCharges(getUnitChargeData()) 
+}, []);
+  // componentDidMount() {
+  //   this.setState({
+
+  //     // unitinfos: getUnitList(), 
+
+  //     //   const {data} = await axios.get(`  ${this.state.page}`);
+  //     //units: data.data,
+  //     //     pages: data.total_pages,
+  //     //     page: 1
+  //   });
+  // }
+
+  const pageSelected = async (page) => {
+    // const {getData} = await axios.get(` ${page}`);
+    
+      // units: getData,
+      setPage(page)
     
   };
-  
-
-  componentDidMount() {
-    this.setState({
-      unitcharges: getData(),
-      // unitinfos: getUnitList(), 
-
-      //   const {data} = await axios.get(`  ${this.state.page}`);
-      //units: data.data,
-      //     pages: data.total_pages,
-      //     page: 1
-    });
-  }
-
-  pageSelected = async (page) => {
-    // const {getData} = await axios.get(` ${page}`);
-    this.setState({
-      // units: getData,
-      page: page,
-    });
-  };
  
   
  
 
-  render() {
-    const { pages, page } = this.state;
+
+
     return (
   <>
                 
      
-        <h1>UnitCharges</h1>
+        <h3>Unit Charges</h3>
 
         <table className="table table-striped" style={{border: "none"}}>
           <thead>
@@ -57,7 +70,7 @@ class UnitCharge extends Component {
             </tr>
           </thead>
           <tbody>
-            {this.state.unitcharges.map((unitcharge, index) => (
+            {unitcharges.map((unitcharge, index) => (
               <tr key={index}>
                 <th scope="row">{index + 1}</th>
                 <td>{unitcharge.itemAs}</td>
@@ -86,13 +99,13 @@ class UnitCharge extends Component {
           <Pagination
             pages={pages}
             currentPage={page}
-            onPageSelect={(page) => this.pageSelected(page)}
+            onPageSelect={(page) => pageSelected(page)}
           />
         </div>
       </>
     ); 
   }
-}
+
 
 
 export default UnitCharge;

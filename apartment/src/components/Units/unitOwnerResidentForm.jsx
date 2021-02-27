@@ -1,12 +1,13 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-class UnitOwnerResidentForm extends Component {
-    state = {  }
-    
-    render() { 
+function UnitOwnerResidentForm(){
+
+     
         return ( 
             <form>
-                
+
+                   
+
                 <div className="input-group mb-3">
                 <div className="input-group-prepend">
                     <label className="input-group-text" htmlFor="resident">Resident</label>
@@ -32,12 +33,18 @@ class UnitOwnerResidentForm extends Component {
                     <option value="3">Rahimi</option>
                     
                 </select>
-                </div>                              
+                </div>   
+                   
+                <div className="form-group">
+                    <label htmlFor="date">Date</label>
+                    <input type="text" className="form-control" id="Date"  placeholder="Enter date"></input>
+                   
+                </div>                        
                
                 <button type="submit" className="btn btn-primary m-2">Submit</button>
             </form>
          );
     }
-}
+
 
 export default UnitOwnerResidentForm;

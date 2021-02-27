@@ -1,31 +1,40 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import { getExpenses } from "./expensesServices";
 import Pagination from '../../common/pagination';
 
-class Expenses extends Component {
-  state = {
-      expenses: [],
-      pages: 6,
-      page: 1
-  };
 
-  componentDidMount = async () =>{
-      const newExpenses = await getExpenses();
-      this.setState({
-        expenses: newExpenses
-      })
-  }
+const Expenses = ()=>{
+  const [expenses, setExpenses]=useState([])
+  const [page, setPage]=useState(1)
+  const [pages, setPages]=useState(5)
 
-  handlePageSelect = (pagenum) => {
+// class Expenses extends Component {
+//   state = {
+//       expenses: [],
+//       pages: 6,
+//       page: 1
+//   };
+useEffect(()=>{
+    
+    setExpenses(getExpenses)
+}, []);
+  // componentDidMount = async () =>{
+  //     const newExpenses = await getExpenses();
+  //     this.setState({
+  //       expenses: newExpenses
+  //     })
+  // }
+
+  const handlePageSelect = (pagenum) => {
         // api call and get new expenses page from backend
-        this.setState({
-            page: pagenum
-        })
+        
+            setPage(pagenum)
+        
     }
 
-  render() {
+  
     //const expenses = getExpenses();
-    const {expenses, page, pages} = this.state;
+    // const {expenses, page, pages} = this.state;
     return (
       <>
         <table class="table">
@@ -55,11 +64,11 @@ class Expenses extends Component {
         <Pagination 
             pages={pages}
             currentPage={page}
-            onPageSelect={(pagenum) => this.handlePageSelect(pagenum)}
+            onPageSelect={(pagenum) => handlePageSelect(pagenum)}
         />
       </>
     );
   }
-}
+
 
 export default Expenses;

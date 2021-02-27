@@ -1,31 +1,38 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import { getExpensesCategories } from "./expensesServices";
 import Pagination from '../../common/pagination'
 
-class ExpensesCategory extends Component {
-    state = { 
-        expensesCategories: [],
-        page: 1,
-        pages: 6
-     }
+const ExpensesCategory =()=>{
+const [expensesCategories, setExpensesCategories]= useState([])
+const [page, setPage]=useState(1)
+const [pages, setPages]=useState(5)
 
-    componentDidMount= async () => {
-        const newExpenseCat = await getExpensesCategories();
-        // todo: get how many pages
-        this.setState({
-            expensesCategories: newExpenseCat
-        })
-    }
+// class ExpensesCategory extends Component {
+//     state = { 
+//         expensesCategories: [],
+//         page: 1,
+//         pages: 6
+//      }
+useEffect(() =>{
+    setExpensesCategories(getExpensesCategories())
+}, []);
+    // componentDidMount= async () => {
+    //     const newExpenseCat = await getExpensesCategories();
+    //     // todo: get how many pages
+    //     this.setState({
+    //         expensesCategories: newExpenseCat
+    //     })
+    // }
 
-    handlePageSelect = (pagenum) => {
+    const handlePageSelect = (pagenum) => {
         // api call and get new expenses categories page from backend
-        this.setState({
-            page: pagenum
-        })
-    }
+        
+            setPage(pagenum)
+        };
+    
 
-    render() { 
-        const {expensesCategories, pages, page} = this.state;
+     
+        // const {expensesCategories, pages, page} = this.state;
         return ( 
             <>
                 <table class="table">
@@ -49,11 +56,11 @@ class ExpensesCategory extends Component {
                 <Pagination 
                     pages={pages}
                     currentPage={page}
-                    onPageSelect={(pagenum) => this.handlePageSelect(pagenum)}
+                    onPageSelect={(pagenum) => handlePageSelect(pagenum)}
                 />
             </>
          );
     }
-}
+
  
 export default ExpensesCategory;

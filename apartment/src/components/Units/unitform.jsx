@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-class UnitForm extends Component {
-    state = {  }
-    render() { 
+function UnitForm (){
+
+     
         return ( 
             <form>
                 <div className="form-group">
@@ -16,10 +16,12 @@ class UnitForm extends Component {
                      <small id="area" class="form-text text-muted">Enter unit area by meters.</small>
                 </div>
                 
+               
+
                 <button type="submit" className="btn btn-primary">Submit</button>
             </form>
          );
     }
-}
+
 
 export default UnitForm;

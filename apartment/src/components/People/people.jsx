@@ -1,59 +1,49 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import FilterList from "../../common/filterList";
 import Pagination from "../../common/pagination";
 import { getItemList, getPeople } from "./peopleServices";
 
-class People extends Component {
-  state = {
-    people: [],
-    itemList: getItemList(),
-    selectedItem: { id: 0 },
-    pages: 0,
-    page: 1,
+const People =()=>{
+  const [people, setPeople]=useState([])
+  const [itemList, setItemList]=useState([])
+  const [selectedItem, setSelectedItem]=useState({id:0})
+  const [page, setPage]=useState(1)
+  const [pages, setPages]= useState(5)
+
+
+useEffect(()=>{
+  setPeople(getPeople())
+  setPages(3)
+  setPage(1)
+  setItemList(getItemList())
+},[]);
+  
+
+  const pageSelected = async (page) => {
+    // const people = await getPeople(page);
+      setPage(page)
   };
 
-  async componentDidMount() {
-    const people = await getPeople();
-    this.setState({
-      people,
-      pages: 3,
-      page: 1,
-    });
-  }
-
-  pageSelected = async (page) => {
-    const people = await getPeople(page);
-    this.setState({
-      people,
-      page: page,
-    });
-  };
-
-  handleSelectedItem = async (item) => {
+  const handleSelectedItem = async (item) => {
     //api call
-    const firstPage = 1;
-    const people = await getPeople(firstPage, item.isOwner);
-
-    this.setState({
-      selectedItem: item,
-      people,
-    });
+   setSelectedItem(item)
+      
   };
 
-  render() {
-    const { people, itemList, selectedItem, page, pages } = this.state;
-    const peopleCount = people.length;
+  
+    
+     const peopleCount = people.length;
 
     return (
       <>
-        <div class="row m-2">
+        <div className="row m-2">
           <div className="col-3">
             <FilterList
               items={itemList}
               keyField="id"
               valueField="name"
               selectedItem={selectedItem}
-              onSelect={(item) => this.handleSelectedItem(item)}
+              onSelect={(item) => handleSelectedItem(item)}
             />
           </div>
           <div className="col">
@@ -72,7 +62,7 @@ class People extends Component {
                   </thead>
                   <tbody>
                     {people.map((person, index) => (
-                      <tr>
+                      <tr key={person.id}>
                         <th scope="row">{index + 1}</th>
                         <td>{person.name}</td>
                         <td>{person.phone}</td>
@@ -87,7 +77,7 @@ class People extends Component {
                 <Pagination
                   pages={pages}
                   currentPage={page}
-                  onPageSelect={(page) => this.pageSelected(page)}
+                  onPageSelect={(page) => pageSelected(page)}
                 />
               </>
             ) : (
@@ -98,6 +88,6 @@ class People extends Component {
       </>
     );
   }
-}
+
 
 export default People;

@@ -40,5 +40,5 @@ const fakeUnitCharge = [
 
 // export const getUnitData = () => fakeUnitData;
 
-export const getData = () => fakeUnitCharge;
+export const getUnitChargeData = () => fakeUnitCharge;
 

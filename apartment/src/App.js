@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useState,useEffect } from "react";
 import { Switch, Route, Link } from "react-router-dom";
 import Home from "./components/Home/home";
 import Units from "./components/Units/units";
@@ -16,31 +16,34 @@ import PersonForm from "./components/People/personForm";
 import ExpensesForm from "./components/Expenses/expensesForm";
 import ExpensesTypeForm from "./components/Expenses/expenseTypeForm";
 import CreateBuilding from "./components/Home/createBuilding";
+import Modal from "./common/modal";
 
+const App = ()=>{
+const [modalDisplay, setModalDisplay]=useState(false)
 
-class App extends Component {
-  state = {
-    modalDisplay: false
-  };
+// class App extends Component {
+//   state = {
+//     modalDisplay: false
+//   };
 
-  handleShowModal = () => {
-    this.setState({
-      modalDisplay: true
-    })
-    console.log('show modal')
+  const handleShowModal = () => {
+    // this.setState({
+      setModalDisplay(true)
+    }
+    // console.log('show modal')
+  // }
+
+  const handleCloseModal = () => {
+    // this.setState({
+      setModalDisplay(false)
+    
   }
 
-  handleCloseModal = () => {
-    this.setState({
-      modalDisplay: false
-    })
-  }
-
-  render() {
+  
     return (
       <>
-        <Header showModal={this.handleShowModal}/>
-        <Modal show={this.state.modalDisplay} hideModal={this.handleCloseModal} />
+        <Header showModal={handleShowModal}/>
+        <Modal show={modalDisplay} hideModal={handleCloseModal} />
         <div className="container">
           <Switch>
             {/* ============Units =============== */}
@@ -119,6 +122,6 @@ class App extends Component {
       </>
     );
   }
-}
+
 
 export default App;

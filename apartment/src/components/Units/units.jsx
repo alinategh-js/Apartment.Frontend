@@ -1,43 +1,48 @@
-import React, { Component } from "react";
+import React, {  useEffect, useState } from "react";
 import { getData } from "./unitsServices";
 //import axios from "axios";
 import { Link } from "react-router-dom";
 import Pagination from "../../common/pagination";
 
-class Units extends Component {
-  state = {
-    units: [],
-    pages: 6,
-    page: 1,
-  };
+const Units = () =>{
+  const [units,setUnits]=useState([])
+  const [page, setPage]=useState(1)
+  const [pages,setPages]=useState(5)
 
-  async componentDidMount() {
-    this.setState({
-      units: getData(),
-      //   const {data} = await axios.get(`  ${this.state.page}`);
-      //units: data.data,
-      //     pages: data.total_pages,
-      //     page: 1
-    });
-  }
+// class Units extends Component {
+//   state = {
+//     units: [],
+//     pages: 6,
+//     page: 1,
+//   };
+useEffect (()=>{
+  setUnits(getData())
+}, []);
+  // async componentDidMount() {
+  //   this.setState({
+  //     units: getData(),
+  //     //   const {data} = await axios.get(`  ${this.state.page}`);
+  //     //units: data.data,
+  //     //     pages: data.total_pages,
+  //     //     page: 1
+  //   });
+  // }
 
-  pageSelected = async (page) => {
+  const pageSelected = async (page) => {
     // const {getData} = await axios.get(` ${page}`);
-    this.setState({
+    
       // units: getData,
-      page: page
-      })
+      setPage(page)
+      };
 
-  };
+  
 
-  render() {
-    const { pages, page } = this.state;
+  
+    // const { pages, page } = this.state;
 
     return (
       <>
-        <Link to="/units/new">
-          <button className="btn btn-success m-2">Add Units</button>
-        </Link>
+       
         <h1>Units</h1>
 
         <table className="table table-striped">
@@ -53,8 +58,8 @@ class Units extends Component {
             </tr>
           </thead>
           <tbody>
-            {this.state.units.map((unit, index) => (
-              <tr>
+            {units.map((unit, index) => (
+              <tr key={unit.id}>
                 <th scope="row">{index + 1}</th>
                 <td>{unit.unitNumber}</td>
                 <td>{unit.owner}</td>
@@ -69,11 +74,11 @@ class Units extends Component {
         <Pagination
           pages={pages}
           currentPage={page}
-          onPageSelect={(page) => this.pageSelected(page)}
+          onPageSelect={(page) => pageSelected(page)}
         />
       </>
     );
   }
-}
+
 
 export default Units;

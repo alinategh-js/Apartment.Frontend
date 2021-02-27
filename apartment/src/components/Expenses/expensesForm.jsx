@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 
-class ExpensesForm extends Component {
-    state = {  }
-    render() { 
+function ExpensesForm (){
+
+ 
         return ( 
             <form>
                 <div className="form-group">
@@ -28,6 +28,6 @@ class ExpensesForm extends Component {
             </form>
          );
     }
-}
+
 
 export default ExpensesForm;

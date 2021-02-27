@@ -1,8 +1,10 @@
-import React, { Component } from "react";
+import React from "react";
 
-class PersonForm extends Component {
-  state = {  }
-    render() { 
+function PersonForm (){
+
+
+
+     
         return ( 
             <form>
                 <div className="form-group">
@@ -19,7 +21,7 @@ class PersonForm extends Component {
             </form>
          );
     }
-}
+
 
 
 export default PersonForm;
