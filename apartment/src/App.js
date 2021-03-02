@@ -16,7 +16,7 @@ import PersonForm from "./components/People/personForm";
 import ExpensesForm from "./components/Expenses/expensesForm";
 import ExpensesTypeForm from "./components/Expenses/expenseTypeForm";
 import CreateBuilding from "./components/Home/createBuilding";
-
+import Modal from "./common/modal"
 
 class App extends Component {
   state = {

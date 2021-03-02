@@ -72,7 +72,7 @@ class People extends Component {
                   </thead>
                   <tbody>
                     {people.map((person, index) => (
-                      <tr>
+                      <tr key={index}>
                         <th scope="row">{index + 1}</th>
                         <td>{person.name}</td>
                         <td>{person.phone}</td>
@@ -91,7 +91,7 @@ class People extends Component {
                 />
               </>
             ) : (
-              <div></div>
+              <div>There are no people registered in database.</div>
             )}
           </div>
         </div>

@@ -54,7 +54,7 @@ class Units extends Component {
           </thead>
           <tbody>
             {this.state.units.map((unit, index) => (
-              <tr>
+              <tr key={index}>
                 <th scope="row">{index + 1}</th>
                 <td>{unit.unitNumber}</td>
                 <td>{unit.owner}</td>
