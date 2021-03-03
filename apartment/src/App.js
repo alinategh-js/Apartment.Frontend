@@ -5,7 +5,7 @@ import Units from "./components/Units/units";
 import People from "./components/People/people";
 import Charges from "./components/Charges/charges";
 import ExpensesHome from "./components/Expenses/expenses-home";
-import ExpensesCategory from "./components/Expenses/expenses-category";
+import ExpensesCategory from "./components/Expenses/expenses-type";
 import Expenses from "./components/Expenses/expenses";
 import Header from "./common/header";
 import Footer from "./common/footer";
@@ -17,38 +17,37 @@ import ExpensesForm from "./components/Expenses/expensesForm";
 import ExpensesTypeForm from "./components/Expenses/expenseTypeForm";
 import CreateBuilding from "./components/Home/createBuilding";
 import Modal from "./common/modal";
+import CalculateChargeForm from "./components/Charges/calculateChargeForm";
+
+
+export const BuildingContext = React.createContext([]) 
 
 const App = ()=>{
 const [modalDisplay, setModalDisplay]=useState(false)
 
-// class App extends Component {
-//   state = {
-//     modalDisplay: false
-//   };
+//const {} = useContext(BuildingContext)
 
   const handleShowModal = () => {
-    // this.setState({
+
       setModalDisplay(true)
     }
-    // console.log('show modal')
-  // }
 
   const handleCloseModal = () => {
-    // this.setState({
       setModalDisplay(false)
     
   }
 
+
   
     return (
-      <>
+      <BuildingContext.Provider  >
         <Header showModal={handleShowModal}/>
         <Modal show={modalDisplay} hideModal={handleCloseModal} />
         <div className="container">
           <Switch>
             {/* ============Units =============== */}
            
-            <Route path="/units/form/:id">
+            <Route path="/units/edit/:id">
               <UnitOwnerResidentForm />
             </Route>
 
@@ -74,6 +73,9 @@ const [modalDisplay, setModalDisplay]=useState(false)
             {/* ================================*/}
 
             {/* ===========Charges ==============*/}
+            <Route path="/charges/calculate">
+              <CalculateChargeForm />
+            </Route>
 
             <Route path="/charges/:id">
               <UnitCharge />
@@ -108,18 +110,21 @@ const [modalDisplay, setModalDisplay]=useState(false)
             {/* ==================================== */}
 
             {/* ===========Home ==============*/}
+
+            <Route path="/home">
+              <Home />
+            </Route>
+            
             <Route path="/">
               <CreateBuilding />
             </Route>
 
-            <Route path="/">
-              <Home />
-            </Route>
+            
             {/* ============================= */}
           </Switch>
         </div>
         <Footer />
-      </>
+      </BuildingContext.Provider>
     );
   }
 

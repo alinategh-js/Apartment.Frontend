@@ -1,102 +1,92 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { getChargeData, getPerUnitChargeList } from "./chargesServices";
 import FilterList from "../../common/filterList";
 // import axios from 'axios';
-import { Link, Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Pagination from "../../common/pagination";
 
+const Charges = () => {
+  const [charges, setCharges] = useState([]);
+  const [unitChargeList, setUnitChargeList] = useState([]);
+  const [selectedUnit, setSelectedUnit] = useState({ id: 0 });
+  const [page, setPage] = useState(1);
+  const [pages, setPages] = useState(5);
 
-const Charges = ()=>{
-  const [charges, setCharges] = useState([])
-  const [unitChargeList, setUnitChargeList]=useState([])
-  const [selectedUnit, setSelectedUnit] = useState({id:0})
-  const [page, setPage]=useState(1)
-  const [pages, setPages]=useState(5)
-
-
-
-
-useEffect(()=>{
-  setCharges(getChargeData())
-  setUnitChargeList(getPerUnitChargeList())
-}, [])
+  useEffect(() => {
+    setCharges(getChargeData());
+    setUnitChargeList(getPerUnitChargeList());
+  }, []);
 
   const pageSelected = async (page) => {
     // api call to get new page of charges from backend
-    
-     
-      setPage(page)
-      
-
+    setPage(page);
   };
   const handleSelectedItem = async (item) => {
     //api call
-   setSelectedUnit(item)
-      
+    setSelectedUnit(item);
   };
 
-  
-   
-    const chargeCount = charges.length;
+  const chargeCount = charges.length;
 
-    return (
-      <>
-      
+  return (
+    <>
       <div className="row m-2">
         <div className="col-2">
           <FilterList
-              items={unitChargeList}
-              keyField="id"
-              valueField="name"
-              selectedItem={selectedUnit}
-              onSelect={(item) => handleSelectedItem(item)}
-              
-            />
+            items={unitChargeList}
+            keyField="id"
+            valueField="name"
+            selectedItem={selectedUnit}
+            onSelect={(item) => handleSelectedItem(item)}
+          />
         </div>
-        <div className='col-10'>
-        {charges.length > 0 ? (
-          <>
-          <table className="table table-striped">
+        <div className="col-10">
           
-            <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Unit Number</th>
-                <th scope="col">From</th>
-                <th scope="col">To</th>
-                <th scope="col">Amount</th>
-                <th scope="col">UnitDetail</th>
-              </tr>
-            </thead>
-            <tbody>
-              {charges.map((charge, index) => (
-                  <tr key={charge.id}>
-                    <th scope="row">{index + 1}</th>
-                    <td>{charge.unitNumber}</td>
-                    <td>{charge.from}</td>
-                    <td>{charge.to}</td>
-                    <td>{charge.amount}</td>
-                    <td><Link className="btn btn-secondary btn-sm active m-2" to = {`/charges/${charge.unitNumber}`} role="button" aria-pressed="true">Detail</Link></td>
-
+            <>
+              <table className="table table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Unit Number</th>
+                    <th scope="col">From</th>
+                    <th scope="col">To</th>
+                    <th scope="col">Amount</th>
+                    <th scope="col">UnitDetail</th>
                   </tr>
-              ))}
-            </tbody>
-            
-          </table>
-          <Pagination
-            pages={pages}
-            currentPage={page}
-            onPageSelect={(pagenum) => pageSelected(pagenum)}
-            />
+                </thead>
+                <tbody>
+                {charges.length > 0 
+                      ? charges.map((charge, index) => (
+                      <tr key={charge.id}>
+                        <th scope="row">{index + 1}</th>
+                        <td>{charge.unitNumber}</td>
+                        <td>{charge.from}</td>
+                        <td>{charge.to}</td>
+                        <td>{charge.amount}</td>
+                        <td><Link className="btn btn-secondary btn-sm active m-2" to = {`/charges/${charge.unitNumber}`} role="button" aria-pressed="true">Detail</Link></td>
+                        <td></td>
+                      </tr>
+                    ))
+                      : <tr></tr>
+                  }
+                </tbody>
+              </table>
+              {/* <Pagination
+                pages={pages}
+                currentPage={page}
+                onPageSelect={(pagenum) => pageSelected(pagenum)}
+              /> */}
+              <div>
+                <Link className="btn btn-secondary btn-sm active m-2" to = {`/charges/calculate`} role="button" aria-pressed="true">
+                  Calculate Charge
+                </Link>
+              </div>
             </>
-          ) : (
-            <div></div>
-          )}
+          
         </div>
       </div>
     </>
   );
-}
-
+};
 
 export default Charges;

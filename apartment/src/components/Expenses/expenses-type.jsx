@@ -1,28 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { getExpensesCategories } from "./expensesServices";
+import { getExpensesType } from "./expensesServices";
 import Pagination from '../../common/pagination'
 
-const ExpensesCategory =()=>{
-const [expensesCategories, setExpensesCategories]= useState([])
+const ExpensesType =()=>{
+const [expensesTypes, setExpensesTypes]= useState([])
 const [page, setPage]=useState(1)
 const [pages, setPages]=useState(5)
 
-// class ExpensesCategory extends Component {
-//     state = { 
-//         expensesCategories: [],
-//         page: 1,
-//         pages: 6
-//      }
 useEffect(() =>{
-    setExpensesCategories(getExpensesCategories())
+    setExpensesTypes(getExpensesType())
 }, []);
-    // componentDidMount= async () => {
-    //     const newExpenseCat = await getExpensesCategories();
-    //     // todo: get how many pages
-    //     this.setState({
-    //         expensesCategories: newExpenseCat
-    //     })
-    // }
 
     const handlePageSelect = (pagenum) => {
         // api call and get new expenses categories page from backend
@@ -30,25 +17,41 @@ useEffect(() =>{
             setPage(pagenum)
         };
     
+        const handleDelete = (id) => {
 
+            setExpensesTypes(
+              expensesTypes.filter(((c) => c.id !== id))
+            )
+          };
      
-        // const {expensesCategories, pages, page} = this.state;
+
         return ( 
             <>
-                <table class="table">
+                <table className ="table">
                     <thead>
                         <tr>
                         <th scope="col">#</th>
                         <th scope="col">Title</th>
                         <th scope="col">Formula</th>
+                        <th scope="col">Payer</th>
+                        <th scope="col">Delete</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {expensesCategories.map((exp, index) => (
-                        <tr>
+                        {expensesTypes.map((exp, index) => (
+                        <tr key={exp.id}>
                             <th>{index}</th>
                             <td>{exp.title}</td>
                             <td>{exp.formula}</td>
+                            <td>{exp.payer}</td>
+                            <td>
+                                <button
+                                className="btn btn-warning m-2"
+                                onClick={() => handleDelete(exp.id)}
+                                >
+                                Del
+                                </button>
+                                </td>
                         </tr>
                         ))}
                     </tbody>
@@ -63,4 +66,4 @@ useEffect(() =>{
     }
 
  
-export default ExpensesCategory;
+export default ExpensesType;
