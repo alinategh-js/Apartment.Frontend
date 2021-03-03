@@ -1,17 +1,22 @@
-// ==== for fake data and API calls ==== 
-const fakeUnits = [{
-    id: 3,
-    unitNumber: 4,
-    owner: "Milani",
-    resident: "Karami",
-    area: 67
-},
-{
-    id: 6,
-    unitNumber: 6,
-    owner: "Khani",
-    resident: "Akbari",
-    area: 80
-}]
+import axios from "axios"
+import { getAllPeople } from '../People/peopleServices'
 
-export const getData = () => fakeUnits
+const url = "http://193.151.128.227:5555/api/units"
+const options = {
+    headers: {
+        'Content-Type': 'application/json; charset=utf-8',
+    }
+};
+
+export const getUnit = (page , size) => axios.get(
+    `${url}`,
+    {
+    params: {
+        page,
+        size
+    }
+})
+
+export const postUnit = (unit) => axios.post(url, unit, options)
+
+export const updateUnit = (unitId, unitOwnerResident) => axios.put(url, unitOwnerResident, options)

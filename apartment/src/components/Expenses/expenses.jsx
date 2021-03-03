@@ -1,34 +1,36 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import { getExpenses } from "./expensesServices";
 import Pagination from '../../common/pagination';
 
-class Expenses extends Component {
-  state = {
-      expenses: [],
-      pages: 6,
-      page: 1
-  };
 
-  componentDidMount = async () =>{
-      const newExpenses = await getExpenses();
-      this.setState({
-        expenses: newExpenses
-      })
-  }
+const Expenses = ()=>{
+  const [expenses, setExpenses]=useState([])
+  const [page, setPage]=useState(1)
+  const [pages, setPages]=useState(5)
 
-  handlePageSelect = (pagenum) => {
+useEffect(()=>{
+    
+    setExpenses(getExpenses)
+}, []);
+
+  const handlePageSelect = (pagenum) => {
         // api call and get new expenses page from backend
-        this.setState({
-            page: pagenum
-        })
-    }
+        
+            setPage(pagenum)
+        }
+        
+  const handleDelete = (id) => {
 
-  render() {
-    //const expenses = getExpenses();
-    const {expenses, page, pages} = this.state;
+    setExpenses(
+      expenses.filter(((c) => c.id !== id))
+    )
+  };
+      
+  
+  
     return (
       <>
-        <table class="table">
+        <table className="table">
           <thead>
             <tr>
               <th scope="col">#</th>
@@ -37,17 +39,26 @@ class Expenses extends Component {
               <th scope="col">From</th>
               <th scope="col">To</th>
               <th scope="col">Amount</th>
+              <th scope="col">Delete</th>
             </tr>
           </thead>
           <tbody>
             {expenses.map((exp, index) => (
-              <tr>
+              <tr key = {exp.id}>
                 <th>{index}</th>
                 <td>{exp.title}</td>
                 <td>{exp.type}</td>
                 <td>{exp.from}</td>
                 <td>{exp.to}</td>
                 <td>{exp.amount}</td>
+                <td>
+        <button
+          className="btn btn-warning m-2"
+          onClick={() => handleDelete(exp.id)}
+        >
+          Del
+        </button>
+        </td>
               </tr>
             ))}
           </tbody>
@@ -55,11 +66,11 @@ class Expenses extends Component {
         <Pagination 
             pages={pages}
             currentPage={page}
-            onPageSelect={(pagenum) => this.handlePageSelect(pagenum)}
+            onPageSelect={(pagenum) => handlePageSelect(pagenum)}
         />
       </>
     );
   }
-}
+
 
 export default Expenses;

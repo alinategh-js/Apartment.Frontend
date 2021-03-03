@@ -8,9 +8,9 @@ import { faFileInvoiceDollar, faSitemap } from '@fortawesome/free-solid-svg-icon
 const fileInvoiceIcon = <FontAwesomeIcon icon={faFileInvoiceDollar} className='card-icon'/>
 const siteMapIcon = <FontAwesomeIcon icon={faSitemap} className='card-icon'/>
 
-class ExpensesHome extends Component {
-    state = {  }
-    render() { 
+function ExpensesHome (){
+
+     
         return (
             <div className='card-container'>
                 <Link to='/expenses/exp' className='card-link'>
@@ -36,6 +36,6 @@ class ExpensesHome extends Component {
             
          );
     }
-}
+
  
 export default ExpensesHome;

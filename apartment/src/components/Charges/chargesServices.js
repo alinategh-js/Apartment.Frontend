@@ -1,37 +1,6 @@
-// ==== for fake data and API calls ====
-const fakeCharges = [
-  {
-    id: 1,
-    unitNumber: 1,
-    from: "2002/2/30",
-    to: "2002/3/30",
-    amount: 250000,
-  },
-  {
-    id: 2,
-    unitNumber: 2,
-    from: "2002/2/30",
-    to: "2002/3/30",
-    amount: 250000,
-  },
-  {
-    id: 3,
-    unitNumber: 3,
-    from: "2002/2/30",
-    to: "2002/3/30",
-    amount: 300000,
-  },
-  {
-    id: 4,
-    unitNumber: 4,
-    from: "2002/2/30",
-    to: "2002/3/30",
-    amount: 250000,
-  },
-];
+import axios from "axios";
 
-
-const unitList = [
+const perunitchargeList = [
   {
     id: 2,
     name: "Unit 1",
@@ -42,6 +11,13 @@ const unitList = [
   },
 ];
 
-export const getUnitList = () => unitList;
+const url = "http://193.151.128.227:5555/api/charges"
+const options = {
+    headers: {'Content-Type': 'application/json'}
+};
 
-export const getData = () => fakeCharges;
+export const getPerUnitChargeList = () => perunitchargeList;
+
+export const getChargeData = () => axios.get(url, options);
+
+export const postChargeCalculation = (chargeCalculationDate) => axios.post(url, chargeCalculationDate, options);
