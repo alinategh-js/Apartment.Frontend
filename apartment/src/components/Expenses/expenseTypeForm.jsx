@@ -1,35 +1,38 @@
 import React, { useState, useEffect } from "react";
-import { getExpensesType, postExpenseType } from "./expensesServices";
+import {  getFormulas, postExpenseType } from "./expensesServices";
 
 function ExpenseTypeForm() {
-  const [formulaTypes, setFormulaTypes] = useState([]);
-  const [name, setName] = useState("");
-  const [formulaName, setFormulaName] = useState("");
-  const [payer, setPayer] = useState("");
+  const [selectedFormulaName, setSelectedFormulaName] = useState("");
+  const [formulaNames, setFormulaNames] = useState([]);
+  const [payerOwner, setPayer] = useState(false);
 
   useEffect(async () => {
     //let {data} = await getExpensesType();
-    setFormulaTypes(await getExpensesType());
+    setFormulaNames(await getFormulas());
   }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     let expenseType = {
-      name,
-      formulaName,
+      name: selectedFormulaName,
+      formulaName: selectedFormulaName,
+      forOwner: payerOwner
     };
     await postExpenseType(expenseType);
   };
 
   const handleChange = (e) => {
     let target = e.target;
-    setName(target.value);
+    setSelectedFormulaName(target.value);
   };
 
   const handleSelect = (event) => {
     let target = event.target;
-    if (target.name === "payer") setPayer(target.value);
-    else if (target.name === "formulaName") setFormulaName(target.value);
+    if (target.name === "payer"){
+      if(target.value === 1) setPayer(true); // owner
+      else setPayer(false); // resident
+    } 
+    else if (target.name === "formulaName") setSelectedFormulaName(target.value);
   };
 
   return (
@@ -41,7 +44,6 @@ function ExpenseTypeForm() {
           className="form-control"
           id="name"
           name="name"
-          value={name}
           placeholder="Enter title"
           onChange={handleChange}
         ></input>
@@ -57,12 +59,11 @@ function ExpenseTypeForm() {
           id="formulaName"
           name="formulaName"
           onChange={handleSelect}
-          value={formulaName}
         >
           <option>Choose...</option>
-          {formulaTypes.map((formulaType) => (
-            <option key={formulaType.id} value={formulaType.id}>
-              {formulaType.title}
+          {formulaNames.map((formulaName) => (
+            <option key={formulaName.id} value={formulaName.title}>
+              {formulaName.title}
             </option>
           ))}
         </select>
@@ -79,7 +80,6 @@ function ExpenseTypeForm() {
           id="payer"
           name="payer"
           onChange={handleSelect}
-          value={payer}
         >
           <option>Choose...</option>
 

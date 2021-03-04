@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { getExpenses, getExpensesType, postExpense } from "./expensesServices";
+import { getExpenseTypesByPage, postExpense } from "./expensesServices";
 import DatePicker from "react-datepicker";
 
 import "react-datepicker/dist/react-datepicker.css";
@@ -13,7 +13,7 @@ function ExpensesForm() {
   const [title, setTitle] = useState("");
 
   useEffect(async () => {
-    setExpenseTypes(await getExpensesType());
+    setExpenseTypes(await getExpenseTypesByPage());
   }, []);
 
   const handleSubmit = async (e) => {

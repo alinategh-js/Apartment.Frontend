@@ -39,16 +39,17 @@ function UnitOwnerResidentForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const unitOwnerResident = {
-      ownerId,
-      residentId,
-      residentNumber,
-      date,
+      ownerId: parseInt(ownerId),
+      residentId: parseInt(residentId),
+      residentCount: parseInt(residentNumber),
+      date: date.toISOString(),
     };
-    await updateUnit(unitId, unitOwnerResident);
+    console.log(unitOwnerResident)
+    await updateUnit(id, unitOwnerResident);
   };
 
   return (
-    <form onSubmit={() => handleSubmit}>
+    <form onSubmit={handleSubmit}>
       <div className="input-group mb-3">
         <div className="input-group-prepend">
           <label className="input-group-text" htmlFor="resident">

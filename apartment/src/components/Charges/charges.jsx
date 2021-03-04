@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { getChargeData, getPerUnitChargeList } from "./chargesServices";
+import { getAllCharges, getPerUnitChargeList } from "./chargesServices";
 import FilterList from "../../common/filterList";
 // import axios from 'axios';
 import { Link } from "react-router-dom";
@@ -7,38 +7,18 @@ import Pagination from "../../common/pagination";
 
 const Charges = () => {
   const [charges, setCharges] = useState([]);
-  const [unitChargeList, setUnitChargeList] = useState([]);
-  const [selectedUnit, setSelectedUnit] = useState({ id: 0 });
-  const [page, setPage] = useState(1);
-  const [pages, setPages] = useState(5);
 
-  useEffect(() => {
-    setCharges(getChargeData());
-    setUnitChargeList(getPerUnitChargeList());
+  useEffect(async () => {
+    const { data } = await getAllCharges();
+    data.sort((a, b) => a.from - b.from);
+    setCharges(data);
   }, []);
 
-  const pageSelected = async (page) => {
-    // api call to get new page of charges from backend
-    setPage(page);
-  };
-  const handleSelectedItem = async (item) => {
-    //api call
-    setSelectedUnit(item);
-  };
-
-  const chargeCount = charges.length;
 
   return (
     <>
       <div className="row m-2">
         <div className="col-2">
-          <FilterList
-            items={unitChargeList}
-            keyField="id"
-            valueField="name"
-            selectedItem={selectedUnit}
-            onSelect={(item) => handleSelectedItem(item)}
-          />
         </div>
         <div className="col-10">
           

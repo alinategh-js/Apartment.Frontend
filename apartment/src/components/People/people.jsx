@@ -9,22 +9,27 @@ const People = () => {
   const [selectedItem, setSelectedItem] = useState({ id: 0 });
   const [page, setPage] = useState(1);
   const [pages, setPages] = useState(5);
+  const [size, setSize] = useState(5);
 
-  useEffect(() => {
-    setPeople(getPeopleByPage());
-    setPages(3);
+  useEffect(async () => {
+    const { data } = await getPeopleByPage();
+    setPeople(data.people);
+    setPages(data.totalPages);
     setPage(1);
     setItemList(getItemList());
   }, []);
 
   const pageSelected = async (page) => {
-    // const people = await getPeople(page);
     setPage(page);
+    const { data } = await getPeopleByPage(page, size, selectedItem.isOwner);
+    setPeople(data.people);
   };
 
   const handleSelectedItem = async (item) => {
-    //api call
+    const {data} = await getPeopleByPage(page, pages, item.isOwner)
     setSelectedItem(item);
+    setPeople(data.people)
+    setPages(data.totalPages)
   };
 
   return (
@@ -55,8 +60,8 @@ const People = () => {
                 people.map((person, index) => (
                   <tr key={person.id}>
                     <th scope="row">{index + 1}</th>
-                    <td>{person.name}</td>
-                    <td>{person.phone}</td>
+                    <td>{person.fullName}</td>
+                    <td>{person.phoneNumber}</td>
                     <td>{person.unitId}</td>
                     <td>{person.isOwner ? "Owner" : "Resident"}</td>
                     <td></td>

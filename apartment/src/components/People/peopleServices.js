@@ -14,21 +14,21 @@ export const getItemList = () => [
   },
 ]
 
-const url = "http://193.151.128.227:5555/api/person"
+const url = "http://193.151.128.227:5555/api/people"
 const options = {
     headers: {'Content-Type': 'application/json'}
 };
 
-export const getPeopleByPage = (page= 1 , size= 5, isOwner= 1) => axios.get(
+export const getPeopleByPage = (page= 1 , size= 5, isOwner= 2) => axios.get(
     url,
     {
     params: {
-        page,
-        size,
-        isOwner
+        page: page,
+        size: size,
+        isOwner: isOwner
     }
 })
 
-export const getAllPeople = () => axios.put(url, {}, options);
+export const getAllPeople = () => axios.get(`${url}/all`, {}, options);
 
 export const postPerson = (person) => axios.post(url, person, options)

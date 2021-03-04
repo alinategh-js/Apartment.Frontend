@@ -18,6 +18,6 @@ const options = {
 
 export const getPerUnitChargeList = () => perunitchargeList;
 
-export const getChargeData = () => axios.get(url, options);
+export const getAllCharges = () => axios.get(url, options);
 
 export const postChargeCalculation = (chargeCalculationDate) => axios.post(url, chargeCalculationDate, options);

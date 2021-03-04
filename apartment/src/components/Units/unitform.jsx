@@ -1,18 +1,21 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { BuildingContext } from "../../App";
 import { postUnit } from "./unitsServices";
 
 function UnitForm() {
+  const building = useContext(BuildingContext);
   const [unitNumber, setUnitNumber] = useState(0);
   const [area, setArea] = useState(0);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const unit = {
-      number: unitNumber,
-      buildingId: 3,
-      area
+      number: parseInt(unitNumber),
+      buildingId: building.id,
+      area: area.toString()
     }
-    await postUnit();
+    console.log(unit)
+    await postUnit(unit);
   };
   const handleChange = (e) => {
     let target = e.target;

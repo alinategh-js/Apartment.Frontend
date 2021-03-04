@@ -13,8 +13,8 @@ const Units = () =>{
   //componentDidMount
 useEffect (async ()=>{
   let {data} = await getUnit(page, size)
-  setUnits(data)
-  setPages(data[0].totalPages)
+  setUnits(data.unitPersonModels)
+  setPages(data.totalPages)
 }, []);
 
   const pageSelected = async (page) => {
@@ -22,7 +22,7 @@ useEffect (async ()=>{
 
       setPage(page)
       let{data} = await getUnit(page, size)
-      setUnits(data)
+      setUnits(data.unitPersonModels)
     };
 
   return (

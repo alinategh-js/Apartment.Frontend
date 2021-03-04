@@ -1,47 +1,31 @@
-// ==== for fake data and API calls ====
-
 import axios from "axios";
 
-  
-// export const getExpenses = () =>{
-//     return [
-//         {id: '1', title: 'Gas' , type: 'Gas Bill', from: '1399/03/01' , to: '1399/03/30' , amount: '100000'},
-//         {id:'2', title: 'Electricity' , type: 'Electricity Bill', from: '1399/03/01' , to: '1399/03/30' , amount: '100000'},
-//         {id:'3', title: 'Gas' , type: 'Gas Bill', from: '1399/03/01' , to: '1399/03/30' , amount: '100000'},
-//         {id:'4', title: 'Gas' , type: 'Gas Bill', from: '1399/03/01' , to: '1399/03/30' , amount: '100000'}
-//     ]
-// }
 
-export const getExpensesType = () =>{
-    return [
-        {id: '1', title: 'Gas Bill' , formula: 'By People'},
-        {id: '2', title: 'Electricity Bill' , formula: 'By Area'}
-    ]
-}
-
-const url = "http://193.151.128.227:5555/api/expenseTypes"
+const url = "http://193.151.128.227:5555/api"
 const options = {
     headers: {'Content-Type': 'application/json'}
 };
 
-export const getAllExpenseTypes = () => axios.get(url, {
-    body: {
-        page: 1,
-        size: 5
+export const getExpenseTypesByPage = (page, size) => axios.get(`${url}/expenseTypes`, {
+    params: {
+        page,
+        size
     }
 });
 
-export const postExpenseType = (expenseType) => axios.post(url, expenseType, options);
+export const postExpenseType = (expenseType) => axios.post(`${url}/expenseTypes`, expenseType, options);
 
-export const deleteExpenseType = (expenseTypeId) => axios.delete(`${url}/${expenseTypeId}`);
+export const deleteExpenseType = (expenseTypeId) => axios.delete(`${url}/expenseTypes/${expenseTypeId}`);
 
-export const getExpenses = () => axios.get(url, {
-    body: {
-        page: 1,
-        size: 5
+export const getExpensesByPage = (page, size) => axios.get(`${url}/expenses`, {
+    params: {
+        page,
+        size
     }
 });
 
-export const deleteExpense = (expenseId) => axios.delete(`${url}/${expenseId}`);
+export const deleteExpense = (expenseId) => axios.delete(`${url}/expenses/${expenseId}`);
 
-export const postExpense = (expense) => axios.post(url, expense, options);
+export const postExpense = (expense) => axios.post(`${url}/expenses`, expense, options);
+
+export const getFormulas = () => axios.get(`${url}/expenseTypes/formulas`);

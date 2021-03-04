@@ -9,7 +9,7 @@ const options = {
 };
 
 export const getUnit = (page , size) => axios.get(
-    `${url}`,
+    url,
     {
     params: {
         page,
@@ -19,4 +19,4 @@ export const getUnit = (page , size) => axios.get(
 
 export const postUnit = (unit) => axios.post(url, unit, options)
 
-export const updateUnit = (unitId, unitOwnerResident) => axios.put(url, unitOwnerResident, options)
+export const updateUnit = (unitId, unitOwnerResident) => axios.put(`${url}/${unitId}`, unitOwnerResident, options)
