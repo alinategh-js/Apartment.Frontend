@@ -24,6 +24,8 @@ function UnitForm() {
   };
 
   return (
+    <>
+    <h1>Add New Unit</h1>
     <form onSubmit={handleSubmit}>
       <div className="form-group">
         <label htmlFor="unitnumber">Unit Number</label>
@@ -57,6 +59,7 @@ function UnitForm() {
         Submit
       </button>
     </form>
+    </>
   );
 }
 

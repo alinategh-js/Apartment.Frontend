@@ -22,12 +22,14 @@ const ExpenseType = () => {
   };
 
   const handleDelete = async (id) => {
+    console.log(id)
     await deleteExpenseType(id)
     setExpenseTypes(expenseTypes.filter((c) => c.expenseTypeId !== id));
   };
 
   return (
     <>
+    <h1>Expense Types</h1>
       <table className="table">
         <thead>
           <tr>

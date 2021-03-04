@@ -24,6 +24,8 @@ export const getExpensesByPage = (page, size) => axios.get(`${url}/expenses`, {
     }
 });
 
+export const getAllExpenseTypes = () => axios.get(`${url}/expenseTypes/all`)
+
 export const deleteExpense = (expenseId) => axios.delete(`${url}/expenses/${expenseId}`);
 
 export const postExpense = (expense) => axios.post(`${url}/expenses`, expense, options);

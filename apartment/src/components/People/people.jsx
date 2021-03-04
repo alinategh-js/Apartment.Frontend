@@ -26,14 +26,19 @@ const People = () => {
   };
 
   const handleSelectedItem = async (item) => {
-    const {data} = await getPeopleByPage(page, pages, item.isOwner)
+    const { data } = await getPeopleByPage(page, pages, item.isOwner);
     setSelectedItem(item);
-    setPeople(data.people)
-    setPages(data.totalPages)
+    setPeople(data.people);
+    setPages(data.totalPages);
   };
 
   return (
     <>
+      <div className="row m-2">
+        <div className="col-3">
+          <h1>People</h1>
+        </div>
+      </div>
       <div className="row m-2">
         <div className="col-3">
           <FilterList
@@ -58,7 +63,7 @@ const People = () => {
             <tbody>
               {people.length > 0 ? (
                 people.map((person, index) => (
-                  <tr key={person.id}>
+                  <tr key={index}>
                     <th scope="row">{index + 1}</th>
                     <td>{person.fullName}</td>
                     <td>{person.phoneNumber}</td>

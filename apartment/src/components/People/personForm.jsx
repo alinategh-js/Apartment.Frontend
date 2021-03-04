@@ -20,6 +20,8 @@ function PersonForm() {
   };
 
   return (
+    <>
+    <h1>Add New Person</h1>
     <form onSubmit={handleSubmit}>
       <div className="form-group">
         <label htmlFor="name">Name</label>
@@ -50,6 +52,7 @@ function PersonForm() {
         Submit
       </button>
     </form>
+    </>
   );
 }
 

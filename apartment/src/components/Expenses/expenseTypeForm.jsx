@@ -5,16 +5,18 @@ function ExpenseTypeForm() {
   const [selectedFormulaName, setSelectedFormulaName] = useState("");
   const [formulaNames, setFormulaNames] = useState([]);
   const [payerOwner, setPayer] = useState(false);
+  const [selectedTitle, setSelectedTitle] = useState("")
 
   useEffect(async () => {
-    //let {data} = await getExpensesType();
-    setFormulaNames(await getFormulas());
+    let {data} = await getFormulas();
+    setFormulaNames(data);
+    console.log(data)
   }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     let expenseType = {
-      name: selectedFormulaName,
+      name: selectedTitle,
       formulaName: selectedFormulaName,
       forOwner: payerOwner
     };
@@ -23,7 +25,7 @@ function ExpenseTypeForm() {
 
   const handleChange = (e) => {
     let target = e.target;
-    setSelectedFormulaName(target.value);
+    setSelectedTitle(target.value);
   };
 
   const handleSelect = (event) => {
@@ -36,6 +38,8 @@ function ExpenseTypeForm() {
   };
 
   return (
+    <>
+    <h1>Add New Expense Type</h1>
     <form onSubmit={handleSubmit}>
       <div className="form-group">
         <label htmlFor="name">Title</label>
@@ -61,9 +65,9 @@ function ExpenseTypeForm() {
           onChange={handleSelect}
         >
           <option>Choose...</option>
-          {formulaNames.map((formulaName) => (
-            <option key={formulaName.id} value={formulaName.title}>
-              {formulaName.title}
+          {formulaNames.map((formulaName, index) => (
+            <option key={index} value={formulaName}>
+              {formulaName}
             </option>
           ))}
         </select>
@@ -96,6 +100,7 @@ function ExpenseTypeForm() {
         Submit
       </button>
     </form>
+    </>
   );
 }
 

@@ -18,9 +18,12 @@ const Charges = () => {
   return (
     <>
       <div className="row m-2">
-        <div className="col-2">
+        <div className="col">
+          <h1>Charges</h1>
         </div>
-        <div className="col-10">
+      </div>
+      <div className="row m-2">
+        <div className="col">
           
             <>
               <table className="table table-striped">

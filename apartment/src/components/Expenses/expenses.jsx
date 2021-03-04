@@ -28,6 +28,7 @@ const Expenses = () => {
 
   return (
     <>
+    <h1>Expenses</h1>
       <table className="table">
         <thead>
           <tr>
@@ -45,10 +46,10 @@ const Expenses = () => {
             <tr key={exp.id}>
               <th>{index}</th>
               <td>{exp.title}</td>
-              <td>{exp.type}</td>
+              <td>{exp.expenseTypeName}</td>
               <td>{exp.from}</td>
               <td>{exp.to}</td>
-              <td>{exp.amount}</td>
+              <td>{exp.cost}</td>
               <td>
                 <button
                   className="btn btn-warning m-2"

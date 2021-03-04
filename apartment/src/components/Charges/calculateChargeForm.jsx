@@ -10,11 +10,13 @@ function CalculateChargeForm() {
   const [issueDate, setIssueDate] = useState(new Date());
 
   const handleSubmit = async (e) => {
+    e.preventDefault();
     const chargeCalculationDate = {
-      from,
-      to,
-      issueDate
+      from: from.toISOString(),
+      to: to.toISOString(),
+      issueDate: issueDate.toISOString()
     };
+    console.log(chargeCalculationDate)
     await postChargeCalculation(chargeCalculationDate);
   };
 

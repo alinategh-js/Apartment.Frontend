@@ -1,44 +1,49 @@
 import React, { useState, useEffect } from "react";
-import { getExpenseTypesByPage, postExpense } from "./expensesServices";
+import { getAllExpenseTypes, getExpenseTypesByPage, postExpense } from "./expensesServices";
 import DatePicker from "react-datepicker";
 
 import "react-datepicker/dist/react-datepicker.css";
 
 function ExpensesForm() {
   const [expenseTypes, setExpenseTypes] = useState([]);
-  const [expenseType, setExpenseType] = useState({});
+  const [expenseTypeId, setExpenseTypeId] = useState(-1);
   const [from, setFrom] = useState(new Date());
   const [to, setTo] = useState(new Date());
-  const [amount, setAmount] = useState(0);
+  const [cost, setCost] = useState(0);
   const [title, setTitle] = useState("");
 
   useEffect(async () => {
-    setExpenseTypes(await getExpenseTypesByPage());
+    const { data } = await getAllExpenseTypes();
+    setExpenseTypes(data);
   }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const expense = {
       title,
-      from,
-      to,
-      amount,
-      expenseType,
+      categoryId : parseInt(expenseTypeId),
+      from : from.toISOString(),
+      to: to.toISOString(),
+      cost: parseInt(cost),
     };
+    console.log(expense)
     await postExpense(expense);
   };
   const handleChange = (e) => {
     const target = e.target;
     if (target.name === "title") setTitle(target.value);
-    else if (target.name === "amount") setAmount(target.value);
+    else if (target.name === "cost") setCost(target.value);
   };
 
   const handleSelect = (event) => {
-    let expenseType = event.target.value;
-    setExpenseType(expenseType);
+    let expenseTypeId = event.target.value;
+    setExpenseTypeId(expenseTypeId);
+    console.log(expenseTypeId)
   };
 
   return (
+    <>
+    <h1>Add New Expense</h1>
     <form onSubmit={handleSubmit}>
       <div className="form-group">
         <label htmlFor="title">Title</label>
@@ -54,13 +59,13 @@ function ExpensesForm() {
       </div>
 
       <div className="form-group">
-        <label htmlFor="amount">Amount</label>
+        <label htmlFor="cost">Cost</label>
         <input
-          type="text"
+          type="number"
           className="form-control"
-          id="amount"
-          name="amount"
-          value={amount}
+          id="cost"
+          name="cost"
+          value={cost}
           placeholder="$"
           onChange={handleChange}
         ></input>
@@ -76,11 +81,11 @@ function ExpensesForm() {
           </label>
         </div>
 
-        <select className="custom-select" id="expenseType" name="expenseType" value={expenseType} onChange={handleSelect}>
+        <select className="custom-select" id="expenseTypeId" name="expenseTypeId" value={expenseTypeId} onChange={handleSelect}>
           <option>Choose...</option>
-          {expenseTypes.map((extype) => (
-            <option key={extype.id} value={extype.id}>
-              {extype.title}
+          {expenseTypes.map((expenseType, index) => (
+            <option key={index} value={expenseType.expenseTypeId}>
+              {expenseType.name}
             </option>
           ))}
         </select>
@@ -107,6 +112,7 @@ function ExpensesForm() {
         Submit
       </button>
     </form>
+    </>
   );
 }
 
